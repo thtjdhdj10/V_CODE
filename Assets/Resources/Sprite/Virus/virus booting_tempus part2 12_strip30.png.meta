@@ -1,0 +1,385 @@
+fileFormatVersion: 2
+guid: 9fc7751ffccc1834f9cb2c45ebfa4eb7
+timeCreated: 1465406160
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: virus booting_tempus part2 12_strip30_0
+    21300002: virus booting_tempus part2 12_strip30_1
+    21300004: virus booting_tempus part2 12_strip30_2
+    21300006: virus booting_tempus part2 12_strip30_3
+    21300008: virus booting_tempus part2 12_strip30_4
+    21300010: virus booting_tempus part2 12_strip30_5
+    21300012: virus booting_tempus part2 12_strip30_6
+    21300014: virus booting_tempus part2 12_strip30_7
+    21300016: virus booting_tempus part2 12_strip30_8
+    21300018: virus booting_tempus part2 12_strip30_9
+    21300020: virus booting_tempus part2 12_strip30_10
+    21300022: virus booting_tempus part2 12_strip30_11
+    21300024: virus booting_tempus part2 12_strip30_12
+    21300026: virus booting_tempus part2 12_strip30_13
+    21300028: virus booting_tempus part2 12_strip30_14
+    21300030: virus booting_tempus part2 12_strip30_15
+    21300032: virus booting_tempus part2 12_strip30_16
+    21300034: virus booting_tempus part2 12_strip30_17
+    21300036: virus booting_tempus part2 12_strip30_18
+    21300038: virus booting_tempus part2 12_strip30_19
+    21300040: virus booting_tempus part2 12_strip30_20
+    21300042: virus booting_tempus part2 12_strip30_21
+    21300044: virus booting_tempus part2 12_strip30_22
+    21300046: virus booting_tempus part2 12_strip30_23
+    21300048: virus booting_tempus part2 12_strip30_24
+    21300050: virus booting_tempus part2 12_strip30_25
+    21300052: virus booting_tempus part2 12_strip30_26
+    21300054: virus booting_tempus part2 12_strip30_27
+    21300056: virus booting_tempus part2 12_strip30_28
+    21300058: virus booting_tempus part2 12_strip30_29
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: virus booting_tempus part2 12_strip30_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_2
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_3
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_4
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_5
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_6
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_7
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_8
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_9
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_10
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_11
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_12
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_13
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_14
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_15
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_16
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_17
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_18
+      rect:
+        serializedVersion: 2
+        x: 1746
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_19
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_20
+      rect:
+        serializedVersion: 2
+        x: 1940
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_21
+      rect:
+        serializedVersion: 2
+        x: 2037
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_22
+      rect:
+        serializedVersion: 2
+        x: 2134
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_23
+      rect:
+        serializedVersion: 2
+        x: 2231
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_24
+      rect:
+        serializedVersion: 2
+        x: 2328
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_25
+      rect:
+        serializedVersion: 2
+        x: 2425
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_26
+      rect:
+        serializedVersion: 2
+        x: 2522
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_27
+      rect:
+        serializedVersion: 2
+        x: 2619
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_28
+      rect:
+        serializedVersion: 2
+        x: 2716
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part2 12_strip30_29
+      rect:
+        serializedVersion: 2
+        x: 2813
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

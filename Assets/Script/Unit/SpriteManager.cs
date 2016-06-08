@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using TypeTextureDictionary = 
+using TypeSpriteDictionary = 
 System.Collections.Generic.Dictionary<SpriteManager.Category,
 System.Collections.Generic.Dictionary<SpriteManager.Name,
-System.Collections.Generic.Dictionary<SpriteManager.Status, UnityEngine.Texture>>>;
+System.Collections.Generic.Dictionary<SpriteManager.Status, SpriteManager.SpriteAttribute>>>;
 
 public class SpriteManager : MonoBehaviour {
 
     public const bool PRINT_DEBUG = true;
 
-    public TypeTextureDictionary typeTextureDic = new TypeTextureDictionary();
+    public TypeSpriteDictionary typeSpriteDic = new TypeSpriteDictionary();
+
+    public struct SpriteAttribute
+    {
+        public Sprite sprite;
+        public float speed;
+        public int frameCount;
+    }
 
     private Dictionary<string, Category> strCategoryDic = new Dictionary<string, Category>();
     private Dictionary<string, Name> strNameDic = new Dictionary<string, Name>();
-    private Dictionary<string, Status> strStatuDic = new Dictionary<string, Status>();
+    private Dictionary<string, Status> strStatusDic = new Dictionary<string, Status>();
 
     private List<string> categoryKeywordList;
     private List<string> nameKeywordList;
@@ -23,8 +30,7 @@ public class SpriteManager : MonoBehaviour {
     public const string RESOURCES_PATH = "Resources";
     public const string SPRITE_PATH = "Sprite";
 
-    const string UNUSED_KEYWORD = "@";
-    const string STRIP_KEYWORD = "strip";
+    const string EXCLUDE_KEYWORD = "@";
 
     public int countLoadSprite;
 
@@ -48,71 +54,130 @@ public class SpriteManager : MonoBehaviour {
 
             for (int j = 0; j < spriteNameWithPath.Length; ++j)
             {
-                // 3 파트로 나뉜 이름
-                string[] strType = { "", "", ""};
+                if (spriteNameWithPath[j] == EXCLUDE_KEYWORD)
+                    continue;
+
+                // 4 파트로 나뉜 이름
+                string[] strType = { "", "", "", ""};
                 string[] splitName = GetSplitName(spriteNameWithPath[j]);
                 for(int k = 0; k < splitName.Length; ++k)
                 {
                     strType[k] = splitName[k];
                 }
-
-                GetCompleteName(ref strType);
+                
+                SpriteAttribute sa = new SpriteAttribute();
 
                 // resource.load 를 위한 이름
                 string resourceLoadName = GetLoadingName(spriteNameWithPath[j]);
+                sa.sprite = Resources.Load(resourceLoadName) as Sprite;
 
-                Texture sprite = Resources.Load(resourceLoadName) as Texture;
+                sa.frameCount = GetSpriteFrameCount(strType);
+                sa.speed = GetSpriteSpeed(strType, sa.frameCount);
 
-                CustomLog.CompleteLogError(
-                    "Invalid Sprite: " + resourceLoadName,
-                    PRINT_DEBUG && !(sprite == null));
+                CutSpriteAttribute(ref strType);
+                
+                //
 
-                CustomLog.CompleteLogError(
-                    "Invalid Category: " + strType[0],
-                    PRINT_DEBUG && !strCategoryDic.ContainsKey(strType[0]));
+                if (sa.sprite == null)
+                {
+                    CustomLog.CompleteLogWarning(
+                        "Invalid Sprite: " + resourceLoadName,
+                        PRINT_DEBUG);
 
-                CustomLog.CompleteLogError(
-                    "Invalid Name: " + strType[1],
-                    PRINT_DEBUG && !strNameDic.ContainsKey(strType[1]));
+                    continue;
+                }
 
-                CustomLog.CompleteLogError(
-                    "Invalid Status: " + strType[2],
-                    PRINT_DEBUG && !strStatuDic.ContainsKey(strType[2]));
+                if(strCategoryDic.ContainsKey(strType[0]) == false)
+                {
+                    CustomLog.CompleteLogWarning(
+                        "Invalid Category: " + strType[0],
+                        PRINT_DEBUG);
+
+                    continue;
+                }
+                
+                if(strNameDic.ContainsKey(strType[1]) == false)
+                {
+                    CustomLog.CompleteLogWarning(
+                        "Invalid Name: " + strType[1],
+                        PRINT_DEBUG);
+
+                    continue;
+                }
+                
+                if(strStatusDic.ContainsKey(strType[2]) == false)
+                {
+                    CustomLog.CompleteLogWarning(
+                        "Invalid Status: " + strType[2],
+                        PRINT_DEBUG);
+
+                    continue;
+                }
                 
                 Category category = strCategoryDic[strType[0]];
                 Name name = strNameDic[strType[1]];
-                Status status = strStatuDic[strType[2]];
+                Status status = strStatusDic[strType[2]];
 
-                Dictionary<Status, Texture> d = new Dictionary<Status, Texture>();
-                Dictionary<Name, Dictionary<Status, Texture>> dd = new Dictionary<Name, Dictionary<Status, Texture>>();
-                d[status] = sprite;
+                // TODO 이부분의 코드 정리
+                Dictionary<Status, SpriteAttribute> d = new Dictionary<Status, SpriteAttribute>();
+                Dictionary<Name, Dictionary<Status, SpriteAttribute>> dd = new Dictionary<Name, Dictionary<Status, SpriteAttribute>>();
+                d[status] = sa;
                 dd[name] = d;
-                typeTextureDic[category] = dd;
+                typeSpriteDic[category] = dd;
                 ++countLoadSprite;
             }
         }
 
         CustomLog.CompleteLog("Load Sprite Count: " + countLoadSprite);
     }
-    
-    void GetCompleteName(ref string[] name)
+
+    // [speed]_strip[frame]
+    int GetSpriteFrameCount(string[] name)
     {
-        for (int i = 0; i < name.Length; ++i)
-        {
-            if (name[i] == "")
-                continue;
+        string attribute = GetSpriteAttribute(name);
+        if (attribute == "")
+            return 1;
 
-            string prevName = name[i];
+        int frameCountStartIndex = attribute.LastIndexOf("_strip") + "_strip".Length;
 
-            // @, _strip 이하는 자름
-            int finishIndex = name[i].LastIndexOf("_strip");
-            finishIndex = Mathf.Max(finishIndex, name[i].LastIndexOf(UNUSED_KEYWORD));
-            if (finishIndex == -1)
-                continue;
+        attribute = attribute.Substring(frameCountStartIndex);
 
-            name[i] = name[i].Substring(0, finishIndex);
-        }
+        return System.Convert.ToInt32(attribute);
     }
+
+    float GetSpriteSpeed(string[] name, int frameCount)
+    {
+        string attribute = GetSpriteAttribute(name);
+        if (attribute == "")
+            return 1f;
+
+        int speedEndIndex = attribute.LastIndexOf("_strip");
+
+        attribute = attribute.Substring(0, speedEndIndex);
+
+        int iSpeed = System.Convert.ToInt32(attribute);
+
+        return (float)iSpeed / (float)frameCount;
+    }
+
+    string GetSpriteAttribute(string[] name)
+    {
+        for (int i = name.Length - 1; i >= 0; --i)
+        {
+            if (name[i].Contains("_strip") == true)
+            {
+                return name[i];
+            }
+        }
+
+        return "";
+    }
+
+    void CutSpriteAttribute(ref string[] name)
+    {
+
+    }
+
 
     string[] GetSplitName(string name)
     {
@@ -201,8 +266,8 @@ public class SpriteManager : MonoBehaviour {
         TRANSISTOR_BURST,
 
         // error
-        DIGITAL_CLOCK,
-        ANALOG_CLOCK,
+        DIGITAL_TIMER,
+        ANALOG_TIMER,
         A,
         WING,
         TURRET,
@@ -276,35 +341,35 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["spear"] = Name.SPEAR;
 
         strNameDic["A"] = Name.A;
-        strNameDic["digital_clock"] = Name.DIGITAL_CLOCK;
-        strNameDic["analog_clock"] = Name.ANALOG_CLOCK;
+        strNameDic["digital_timer"] = Name.DIGITAL_TIMER;
+        strNameDic["analog_timer"] = Name.ANALOG_TIMER;
         strNameDic["turret"] = Name.TURRET;
         strNameDic["wing"] = Name.WING;
 
         nameKeywordList = new List<string>(strNameDic.Keys);
 
-        strStatuDic.Clear();
+        strStatusDic.Clear();
 
-        strStatuDic[""] = Status.NONE;
+        strStatusDic[""] = Status.NONE;
 
-        strStatuDic["die"] = Status.DIE;
-        strStatuDic["born"] = Status.BORN;
-        strStatuDic["change"] = Status.CHANGE;
-        strStatuDic["secondform"] = Status.SECOND_FORM;
-        strStatuDic["explosion"] = Status.EXPLOSION;
-        strStatuDic["init"] = Status.INIT;
-        strStatuDic["root"] = Status.ROOT;
-        strStatuDic["column"] = Status.COLUMN;
-        strStatuDic["warn"] = Status.WARN;
-        strStatuDic["part1"] = Status.PART_1;
-        strStatuDic["part2"] = Status.PART_2;
-        strStatuDic["part3"] = Status.PART_3;
-        strStatuDic["part4"] = Status.PART_4;
-        strStatuDic["part5"] = Status.PART_5;
-        strStatuDic["part6"] = Status.PART_6;
-        strStatuDic["part7"] = Status.PART_7;
-        strStatuDic["part8"] = Status.PART_8;
+        strStatusDic["die"] = Status.DIE;
+        strStatusDic["born"] = Status.BORN;
+        strStatusDic["change"] = Status.CHANGE;
+        strStatusDic["secondform"] = Status.SECOND_FORM;
+        strStatusDic["explosion"] = Status.EXPLOSION;
+        strStatusDic["init"] = Status.INIT;
+        strStatusDic["root"] = Status.ROOT;
+        strStatusDic["column"] = Status.COLUMN;
+        strStatusDic["warn"] = Status.WARN;
+        strStatusDic["part1"] = Status.PART_1;
+        strStatusDic["part2"] = Status.PART_2;
+        strStatusDic["part3"] = Status.PART_3;
+        strStatusDic["part4"] = Status.PART_4;
+        strStatusDic["part5"] = Status.PART_5;
+        strStatusDic["part6"] = Status.PART_6;
+        strStatusDic["part7"] = Status.PART_7;
+        strStatusDic["part8"] = Status.PART_8;
 
-        statusKeywordList = new List<string>(strStatuDic.Keys);
+        statusKeywordList = new List<string>(strStatusDic.Keys);
     }
 }

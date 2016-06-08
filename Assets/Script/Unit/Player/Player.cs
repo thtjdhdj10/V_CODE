@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
     public void ShiftPosition(Vector2 delta)
     {

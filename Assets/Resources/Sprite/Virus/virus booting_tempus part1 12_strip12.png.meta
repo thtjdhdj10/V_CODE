@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: f40e350da2606bf4c9066099228b3681
+timeCreated: 1465405776
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: virus booting_tempus part1 12_strip12_0
+    21300002: virus booting_tempus part1 12_strip12_1
+    21300004: virus booting_tempus part1 12_strip12_2
+    21300006: virus booting_tempus part1 12_strip12_3
+    21300008: virus booting_tempus part1 12_strip12_4
+    21300010: virus booting_tempus part1 12_strip12_5
+    21300012: virus booting_tempus part1 12_strip12_6
+    21300014: virus booting_tempus part1 12_strip12_7
+    21300016: virus booting_tempus part1 12_strip12_8
+    21300018: virus booting_tempus part1 12_strip12_9
+    21300020: virus booting_tempus part1 12_strip12_10
+    21300022: virus booting_tempus part1 12_strip12_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: virus booting_tempus part1 12_strip12_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_2
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_3
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_4
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_5
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_6
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_7
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_8
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_9
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_10
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus booting_tempus part1 12_strip12_11
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 0
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

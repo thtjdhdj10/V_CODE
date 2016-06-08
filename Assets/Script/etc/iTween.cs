@@ -5469,14 +5469,14 @@ public class iTween : MonoBehaviour{
 	/// Color
 	/// </param>
 	public static Texture2D CameraTexture(Color color){
-		Texture2D texture = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32, false);
+		Texture2D Texture = new Texture2D(Screen.width,Screen.height,TextureFormat.ARGB32, false);
 		Color[] colors = new Color[Screen.width*Screen.height];
 		for (int i = 0; i < colors.Length; i++) {
 			colors[i]=color;
 		}
-		texture.SetPixels(colors);
-		texture.Apply();
-		return(texture);		
+		Texture.SetPixels(colors);
+		Texture.Apply();
+		return(Texture);		
 	}
 	
 	/// <summary>
@@ -5984,7 +5984,7 @@ public class iTween : MonoBehaviour{
 	}
 	
 	/// <summary>
-	/// Changes a camera fade's texture.
+	/// Changes a camera fade's Texture.
 	/// </summary>
 	/// <param name="depth">
 	/// A <see cref="System.Int32"/>
@@ -6005,21 +6005,22 @@ public class iTween : MonoBehaviour{
 	}
 	
 	/// <summary>
-	/// Changes a camera fade's texture.
+	/// Changes a camera fade's Texture.
 	/// </summary>
-	/// <param name='texture'>
+	/// <param name='Texture'>
 	/// A <see cref="Texture2D"/>
 	/// </param>
-	public static void CameraFadeSwap(Texture2D texture){
+    public static void CameraFadeSwap(Texture2D texture)
+    {
 		if(cameraFade){
-			cameraFade.GetComponent<GUITexture>().texture=texture;
+            cameraFade.GetComponent<GUITexture>().texture = texture;
 		}
 	}
 	
 	/// <summary>
 	/// Creates a GameObject (if it doesn't exist) at the supplied depth that can be used to simulate a camera fade.
 	/// </summary>
-	/// <param name='texture'>
+	/// <param name='Texture'>
 	/// A <see cref="Texture2D"/>
 	/// </param>
 	/// <param name='depth'>
@@ -6028,7 +6029,8 @@ public class iTween : MonoBehaviour{
 	/// <returns>
 	/// A <see cref="GameObject"/> for a reference to the CameraFade.
 	/// </returns>
-	public static GameObject CameraFadeAdd(Texture2D texture, int depth){
+    public static GameObject CameraFadeAdd(Texture2D texture, int depth)
+    {
 		if(cameraFade){
 			return null;
 		}else{			
@@ -6036,7 +6038,7 @@ public class iTween : MonoBehaviour{
 			cameraFade = new GameObject("iTween Camera Fade");
 			cameraFade.transform.position= new Vector3(.5f,.5f,depth);
 			cameraFade.AddComponent<GUITexture>();
-			cameraFade.GetComponent<GUITexture>().texture=texture;
+            cameraFade.GetComponent<GUITexture>().texture = texture;
 			cameraFade.GetComponent<GUITexture>().color = new Color(.5f,.5f,.5f,0);
 			return cameraFade;
 		}
@@ -6045,7 +6047,7 @@ public class iTween : MonoBehaviour{
 	/// <summary>
 	/// Creates a GameObject (if it doesn't exist) at the default depth that can be used to simulate a camera fade.
 	/// </summary>
-	/// <param name='texture'>
+	/// <param name='Texture'>
 	/// A <see cref="Texture2D"/>
 	/// </param>
 	/// <returns>
@@ -6059,7 +6061,7 @@ public class iTween : MonoBehaviour{
 			cameraFade = new GameObject("iTween Camera Fade");
 			cameraFade.transform.position= new Vector3(.5f,.5f,Defaults.cameraFadeDepth);
 			cameraFade.AddComponent<GUITexture>();
-			cameraFade.GetComponent<GUITexture>().texture=texture;
+            cameraFade.GetComponent<GUITexture>().texture = texture;
 			cameraFade.GetComponent<GUITexture>().color = new Color(.5f,.5f,.5f,0);
 			return cameraFade;
 		}
@@ -6079,7 +6081,7 @@ public class iTween : MonoBehaviour{
 			cameraFade = new GameObject("iTween Camera Fade");
 			cameraFade.transform.position= new Vector3(.5f,.5f,Defaults.cameraFadeDepth);
 			cameraFade.AddComponent<GUITexture>();
-			cameraFade.GetComponent<GUITexture>().texture=CameraTexture(Color.black);
+            cameraFade.GetComponent<GUITexture>().texture = CameraTexture(Color.black);
 			cameraFade.GetComponent<GUITexture>().color = new Color(.5f,.5f,.5f,0);
 			return cameraFade;
 		}

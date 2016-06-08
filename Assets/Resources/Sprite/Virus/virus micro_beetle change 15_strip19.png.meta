@@ -1,0 +1,264 @@
+fileFormatVersion: 2
+guid: 1c63dddbe9d5a834b8ceb9b8ed423b79
+timeCreated: 1465406126
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: virus micro_beetle change 15_strip19_0
+    21300002: virus micro_beetle change 15_strip19_1
+    21300004: virus micro_beetle change 15_strip19_2
+    21300006: virus micro_beetle change 15_strip19_3
+    21300008: virus micro_beetle change 15_strip19_4
+    21300010: virus micro_beetle change 15_strip19_5
+    21300012: virus micro_beetle change 15_strip19_6
+    21300014: virus micro_beetle change 15_strip19_7
+    21300016: virus micro_beetle change 15_strip19_8
+    21300018: virus micro_beetle change 15_strip19_9
+    21300020: virus micro_beetle change 15_strip19_10
+    21300022: virus micro_beetle change 15_strip19_11
+    21300024: virus micro_beetle change 15_strip19_12
+    21300026: virus micro_beetle change 15_strip19_13
+    21300028: virus micro_beetle change 15_strip19_14
+    21300030: virus micro_beetle change 15_strip19_15
+    21300032: virus micro_beetle change 15_strip19_16
+    21300034: virus micro_beetle change 15_strip19_17
+    21300036: virus micro_beetle change 15_strip19_18
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: virus micro_beetle change 15_strip19_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_1
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_2
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_3
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_4
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_5
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_6
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_7
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_8
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_9
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_10
+      rect:
+        serializedVersion: 2
+        x: 2060
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_11
+      rect:
+        serializedVersion: 2
+        x: 2266
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_12
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_13
+      rect:
+        serializedVersion: 2
+        x: 2678
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_14
+      rect:
+        serializedVersion: 2
+        x: 2884
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_15
+      rect:
+        serializedVersion: 2
+        x: 3090
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_16
+      rect:
+        serializedVersion: 2
+        x: 3296
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_17
+      rect:
+        serializedVersion: 2
+        x: 3502
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: virus micro_beetle change 15_strip19_18
+      rect:
+        serializedVersion: 2
+        x: 3708
+        y: 0
+        width: 206
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

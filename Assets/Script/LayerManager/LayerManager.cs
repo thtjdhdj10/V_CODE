@@ -5,13 +5,12 @@ public class LayerManager : MonoBehaviour {
 
     public bool useUnityBasicLayer = false;
 
-    enum CustomLayer
+    public enum CustomLayer
     {
-
-        ERROR,
+        CUSTOM_ERROR,
+        SPECIAL_ERROR,
         BUG,
         VIRUS,
-        CONTROLABLE,
         HITTABLE,
         COUNT,
     }
@@ -24,7 +23,9 @@ public class LayerManager : MonoBehaviour {
 
     private static int UNITY_MAX_LAYER_COUNT = 32;
 
-    public static Dictionary<string, int> layerNameNumber = new Dictionary<string, int>();
+    public static Dictionary<string, int> layerNameNumberDic = new Dictionary<string, int>();
+
+    public static Dictionary<System.Type, string> componentLayerNameDic = new Dictionary<System.Type, string>();
 
     //
 
@@ -40,7 +41,7 @@ public class LayerManager : MonoBehaviour {
     
     public void ClearLayer()
     {
-        layerNameNumber.Clear();
+        layerNameNumberDic.Clear();
     }
 
     public void AddUnityLayer()
@@ -68,22 +69,22 @@ public class LayerManager : MonoBehaviour {
         if(name.Length == 0)
             return;
 
-        if (layerNameNumber.ContainsKey(name) == true)
+        if (layerNameNumberDic.ContainsKey(name) == true)
             return;
 
-        int layerCount = layerNameNumber.Count;
+        int layerCount = layerNameNumberDic.Count;
         if (layerCount < MAX_LAYER_COUNT)
         {
-            layerNameNumber[name] = layerCount;
+            layerNameNumberDic[name] = layerCount;
         }
     }
 
     public static bool CheckLayer(bool[] layer, string name)
     {
-        if (layerNameNumber.ContainsKey(name) == false)
+        if (layerNameNumberDic.ContainsKey(name) == false)
             return false;
 
-        int number = layerNameNumber[name];
+        int number = layerNameNumberDic[name];
 
         return layer[number];
     }
@@ -92,10 +93,10 @@ public class LayerManager : MonoBehaviour {
     {
         for (int i = 0; i < names.Length; ++i)
         {
-            if (layerNameNumber.ContainsKey(names[i]) == false)
+            if (layerNameNumberDic.ContainsKey(names[i]) == false)
                 continue;
 
-            int number = layerNameNumber[names[i]];
+            int number = layerNameNumberDic[names[i]];
 
             if (layer[number] == true)
                 return true;
@@ -108,10 +109,10 @@ public class LayerManager : MonoBehaviour {
     {
         for (int i = 0; i < names.Length; ++i)
         {
-            if (layerNameNumber.ContainsKey(names[i]) == false)
+            if (layerNameNumberDic.ContainsKey(names[i]) == false)
                 continue;
 
-            int number = layerNameNumber[names[i]];
+            int number = layerNameNumberDic[names[i]];
 
             if (layer[number] == false)
                 return false;
@@ -124,10 +125,10 @@ public class LayerManager : MonoBehaviour {
     {
         for (int i = 0; i < names.Length; ++i)
         {
-            if (layerNameNumber.ContainsKey(names[i]) == false)
+            if (layerNameNumberDic.ContainsKey(names[i]) == false)
                 continue;
 
-            int number = layerNameNumber[names[i]];
+            int number = layerNameNumberDic[names[i]];
 
             layer[number] = true;
         }
@@ -145,10 +146,10 @@ public class LayerManager : MonoBehaviour {
     {
         for (int i = 0; i < names.Length; ++i)
         {
-            if (layerNameNumber.ContainsKey(names[i]) == false)
+            if (layerNameNumberDic.ContainsKey(names[i]) == false)
                 continue;
 
-            int number = layerNameNumber[names[i]];
+            int number = layerNameNumberDic[names[i]];
 
             layer[number] = false;
         }
@@ -173,20 +174,20 @@ public class LayerManager : MonoBehaviour {
             ret[i] = false;
         }
 
-        if (layerNameNumber.ContainsKey(str) == false)
+        if (layerNameNumberDic.ContainsKey(str) == false)
             return ret;
 
-        ret = GetMask(layerNameNumber[str]);
+        ret = GetMask(layerNameNumberDic[str]);
 
         return ret;
     }
 
     public static int StringToNumber(string str)
     {
-        if (layerNameNumber.ContainsKey(str) == false)
+        if (layerNameNumberDic.ContainsKey(str) == false)
             return -1;
 
-        return layerNameNumber[str];
+        return layerNameNumberDic[str];
     }
 
     public static bool[] GetMask(int number)
