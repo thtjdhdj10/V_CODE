@@ -232,10 +232,10 @@ public class KeyManager : MonoBehaviour {
         break;
         case KeySetName.FPS:
         {
-            ret[KeyCode.W] = Command.MOVE_LEFT;
-            ret[KeyCode.A] = Command.MOVE_RIGHT;
-            ret[KeyCode.S] = Command.MOVE_UP;
-            ret[KeyCode.D] = Command.MOVE_DOWN;
+            ret[KeyCode.W] = Command.MOVE_UP;
+            ret[KeyCode.A] = Command.MOVE_LEFT;
+            ret[KeyCode.S] = Command.MOVE_DOWN;
+            ret[KeyCode.D] = Command.MOVE_RIGHT;
 
             ret[KeyCode.Space] = Command.COMMAND_JUMP;
 
@@ -303,10 +303,10 @@ public class KeyManager : MonoBehaviour {
         break;
         case KeySetName.V_CODE:
         {
-            ret[KeyCode.W] = Command.MOVE_LEFT;
-            ret[KeyCode.A] = Command.MOVE_RIGHT;
-            ret[KeyCode.S] = Command.MOVE_UP;
-            ret[KeyCode.D] = Command.MOVE_DOWN;
+            ret[KeyCode.W] = Command.MOVE_UP;
+            ret[KeyCode.A] = Command.MOVE_LEFT;
+            ret[KeyCode.S] = Command.MOVE_DOWN;
+            ret[KeyCode.D] = Command.MOVE_RIGHT;
 
             ret[KeyCode.Mouse0] = Command.COMMAND_ATTACK;
             ret[KeyCode.Mouse1] = Command.COMMAND_SKILL;
