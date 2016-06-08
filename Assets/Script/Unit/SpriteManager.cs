@@ -69,7 +69,7 @@ public class SpriteManager : MonoBehaviour {
 
                 // resource.load 를 위한 이름
                 string resourceLoadName = GetLoadingName(spriteNameWithPath[j]);
-                sa.sprite = Resources.Load(resourceLoadName) as Sprite;
+                sa.sprite = Resources.Load<Sprite>(resourceLoadName);
 
                 sa.frameCount = GetSpriteFrameCount(strType);
                 sa.speed = GetSpriteSpeed(strType, sa.frameCount);
@@ -160,6 +160,17 @@ public class SpriteManager : MonoBehaviour {
         return (float)iSpeed / (float)frameCount;
     }
 
+    void CutSpriteAttribute(ref string[] name)
+    {
+        for (int i = name.Length - 1; i >= 0; --i)
+        {
+            if (name[i].Contains("_strip") == true)
+            {
+                name[i] = "";
+            }
+        }
+    }
+
     string GetSpriteAttribute(string[] name)
     {
         for (int i = name.Length - 1; i >= 0; --i)
@@ -171,11 +182,6 @@ public class SpriteManager : MonoBehaviour {
         }
 
         return "";
-    }
-
-    void CutSpriteAttribute(ref string[] name)
-    {
-
     }
 
 
@@ -209,7 +215,7 @@ public class SpriteManager : MonoBehaviour {
             }
             if (b)
             {
-                loadingName += splitName[i] + "\\";
+                loadingName += splitName[i] + "/";
             }
         }
         return loadingName.Split('.')[0];
