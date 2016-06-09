@@ -13,9 +13,4 @@ public class SpriteManagerEditor : Editor {
 
         sm.LoadSprite();
     }
-
-    public override void OnInspectorGUI()
-    {
-
-    }
 }

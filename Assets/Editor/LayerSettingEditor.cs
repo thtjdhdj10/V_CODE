@@ -13,6 +13,13 @@ public class LayerSettingEditor : Editor
     {
         layerMaskProp = serializedObject.FindProperty("layerMask");
 
+        LayerManager lm = GameObject.FindObjectOfType<LayerManager>();
+        if (lm != null)
+        {
+            LayerManager.mManager = lm;
+            lm.InitLayer();
+        }
+
         LayerManager.componentLayerNameDic[typeof(CustomError)] = LayerManager.CustomLayer.CUSTOM_ERROR.ToString();
         LayerManager.componentLayerNameDic[typeof(SpecialError)] = LayerManager.CustomLayer.SPECIAL_ERROR.ToString();
         LayerManager.componentLayerNameDic[typeof(HittableUnit)] = LayerManager.CustomLayer.HITTABLE.ToString();
@@ -22,13 +29,6 @@ public class LayerSettingEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-
-        LayerManager lm = GameObject.FindObjectOfType<LayerManager>();
-        if (lm != null)
-        {
-            LayerManager.mManager = lm;
-            lm.InitLayer();
-        }
 
         // target 은 값을 가져오는 용도로만 사용 가능.
         LayerSetting ls = target as LayerSetting;

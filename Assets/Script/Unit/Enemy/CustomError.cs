@@ -3,6 +3,11 @@ using System.Collections;
 
 public class CustomError : Error
 {
+    public Weapon weapon;
+    public Body body;
+
+
+
     public enum Weapon
     {
         NONE,
@@ -25,9 +30,6 @@ public class CustomError : Error
         POWER_BELL,
     }
 
-    public Weapon weapon;
-    public Body body;
-
     protected override void SetColorPerHealth()
     {
         healthColorDic[Health.DEAD] = Color.white;
@@ -39,7 +41,7 @@ public class CustomError : Error
 
     public override void Init()
     {
-        AbilityInit();
+        SetAbillity(power, body, weapon);
 
         SetColorPerHealth();
 
@@ -53,8 +55,111 @@ public class CustomError : Error
 
     void Update()
     {
+        BodyFrame();
 
+        WeaponFrame();
 
         UpdateSpriteColor();
+    }
+
+    //
+
+    void BodyFrame()
+    {
+        switch (body)
+        {
+            case Body.BELL:
+            case Body.POWER_BELL:
+                {
+                    BellFrame();
+                }
+                break;
+            case Body.CIRCLE:
+            case Body.POWER_CIRCLE:
+                {
+                    CircleFrame();
+                }
+                break;
+            case Body.SQUARE:
+            case Body.POWER_SQUARE:
+                {
+                    SquareFrame();
+                }
+                break;
+            case Body.GLIDER:
+                {
+                    GliderFrame();
+                }
+                break;
+        }
+    }
+
+    void BellFrame()
+    {
+
+    }
+
+    void CircleFrame()
+    {
+        
+    }
+
+    void SquareFrame()
+    {
+
+    }
+
+    void GliderFrame()
+    {
+
+    }
+
+    //
+
+    void WeaponFrame()
+    {
+        switch(weapon)
+        {
+            case Weapon.BOLT:
+                {
+                    BoltFrame();
+                }
+                break;
+            case Weapon.LAUNCHER:
+                {
+                    LauncherFrmae(); 
+                }
+                break;
+            case Weapon.LASER:
+                {
+                    LaserFrame();
+                }
+                break;
+            case Weapon.BAZOOKA:
+                {
+                    Bazooka();
+                }
+                break;
+        }
+    }
+
+    void BoltFrame()
+    {
+
+    }
+
+    void LauncherFrmae()
+    {
+
+    }
+
+    void LaserFrame()
+    {
+
+    }
+
+    void Bazooka()
+    {
+
     }
 }

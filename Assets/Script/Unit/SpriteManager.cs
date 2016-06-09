@@ -10,6 +10,8 @@ public class SpriteManager : MonoBehaviour {
 
     public const bool PRINT_DEBUG = true;
 
+    public int countLoadSprite;
+
     public TypeSpriteDictionary typeSpriteDic = new TypeSpriteDictionary();
 
     public struct SpriteAttribute
@@ -23,8 +25,14 @@ public class SpriteManager : MonoBehaviour {
     private Dictionary<string, Name> strNameDic = new Dictionary<string, Name>();
     private Dictionary<string, Status> strStatusDic = new Dictionary<string, Status>();
 
+    [SerializeField]
+    private List<string> loadingSpriteNameList = new List<string>();
+
+    [SerializeField]
     private List<string> categoryKeywordList;
+    [SerializeField]
     private List<string> nameKeywordList;
+    [SerializeField]
     private List<string> statusKeywordList;
 
     public const string RESOURCES_PATH = "Resources";
@@ -32,11 +40,11 @@ public class SpriteManager : MonoBehaviour {
 
     const string EXCLUDE_KEYWORD = "@";
 
-    public int countLoadSprite;
-
     public void LoadSprite()
     {
         countLoadSprite = 0;
+
+        loadingSpriteNameList.Clear();
 
         KeywordSetting();
 
@@ -113,6 +121,8 @@ public class SpriteManager : MonoBehaviour {
 
                     continue;
                 }
+
+                loadingSpriteNameList.Add(strType[0] + " " + strType[1] + " " + strType[2]);
                 
                 Category category = strCategoryDic[strType[0]];
                 Name name = strNameDic[strType[1]];
