@@ -6,7 +6,7 @@ public class CustomError : Error
     public Weapon weapon;
     public Body body;
 
-
+    public float moveDirection;
 
     public enum Weapon
     {
@@ -53,11 +53,15 @@ public class CustomError : Error
         Init();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         BodyFrame();
 
         WeaponFrame();
+    }
+
+    void Update()
+    {
 
         UpdateSpriteColor();
     }
@@ -101,7 +105,20 @@ public class CustomError : Error
 
     void CircleFrame()
     {
-        
+        float moveDistance = currentAbilityDic[BasicAbility.MOVE_SPEED] * Time.fixedDeltaTime;
+        Vector2 moveVector = VEasyCalculator.GetRotatedPosition(moveDirection, moveDistance);
+
+        Vector2 v2Pos = transform.position;
+
+        transform.position = v2Pos + moveVector;
+
+        if (CheckTerritory(v2Pos, currentAbilityDic[BasicAbility.LOGICAL_SIZE]) != ControlableUnit.Direction.NONE)
+        {
+            Vector2 playerPos = Player.player.transform.position;
+            Vector2 pos = transform.position;
+
+            moveDirection = VEasyCalculator.GetDirection(pos, playerPos);
+        }
     }
 
     void SquareFrame()

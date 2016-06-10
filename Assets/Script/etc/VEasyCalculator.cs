@@ -26,13 +26,19 @@ public class VEasyCalculator {
             return false;
 
         float deltaDistanceSquare = Vector2.SqrMagnitude(to - from);
-        
-        if (deltaDistanceSquare > r*r)
+
+        if (deltaDistanceSquare > r * r)
         {
             return false;
         }
 
         return true;
+    }
+
+    public static float GetDirection(Vector2 from, Vector2 to)
+    {
+        Vector2 v2 = (to - from).normalized;
+        return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
 
     public static Vector2 GetRotatedPosition(float degrees, float distance)

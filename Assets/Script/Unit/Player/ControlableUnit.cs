@@ -15,6 +15,7 @@ public class ControlableUnit : MonoBehaviour {
         RIGHT,
         UP,
         DOWN,
+        NONE,
     }
 
     Dictionary<Direction, KeyManager.Command> dirKeyDic = new Dictionary<Direction, KeyManager.Command>();

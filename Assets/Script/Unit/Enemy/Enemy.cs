@@ -6,7 +6,7 @@ public abstract class Enemy : Unit
 {
     public float power = 0f;
 
-    public virtual void Init()
+    public override void Init()
     {
 
     }
