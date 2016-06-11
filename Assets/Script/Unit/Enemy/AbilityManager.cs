@@ -56,7 +56,7 @@ public class AbilityManager {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 20f;
                     abilityDic[Enemy.BasicAbility.LOGICAL_SIZE] = 0.12f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 2.5f;
-                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0.1f;
+                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 60f;
 
                     abilityFactorDic[Enemy.BasicAbility.HEALTH_POINT] = 20f;
                     abilityFactorDic[Enemy.BasicAbility.MOVE_SPEED] = 0.5f;

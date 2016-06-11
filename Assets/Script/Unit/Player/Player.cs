@@ -17,5 +17,13 @@ public class Player : Unit
         transform.position = pos;
     }
 
+    void FixedUpdate()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float dirToMouse = VEasyCalculator.GetDirection(transform.position, mousePos);
 
+        Vector3 rot = transform.eulerAngles;
+        rot.z = dirToMouse + SpriteManager.spriteDefaultRotation;
+        transform.eulerAngles = rot;
+    }
 }

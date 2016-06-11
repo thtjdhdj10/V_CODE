@@ -12,6 +12,8 @@ public class SpriteManager : MonoBehaviour {
 
     public int countLoadSprite;
 
+    public static float spriteDefaultRotation = -90f;
+
     public TypeSpriteDictionary typeSpriteDic = new TypeSpriteDictionary();
 
     public struct SpriteAttribute

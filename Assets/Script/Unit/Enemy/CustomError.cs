@@ -106,18 +106,23 @@ public class CustomError : Error
     void CircleFrame()
     {
         float moveDistance = currentAbilityDic[BasicAbility.MOVE_SPEED] * Time.fixedDeltaTime;
+
         Vector2 moveVector = VEasyCalculator.GetRotatedPosition(moveDirection, moveDistance);
-
         Vector2 v2Pos = transform.position;
-
         transform.position = v2Pos + moveVector;
+
+        float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
+
+        if (weapon != Weapon.SPEAR)
+        {
+            Vector3 rot = transform.eulerAngles;
+            rot.z = dirToPlayer + SpriteManager.spriteDefaultRotation;
+            transform.eulerAngles = rot;
+        }
 
         if (CheckTerritory(v2Pos, currentAbilityDic[BasicAbility.LOGICAL_SIZE]) != ControlableUnit.Direction.NONE)
         {
-            Vector2 playerPos = Player.player.transform.position;
-            Vector2 pos = transform.position;
-
-            moveDirection = VEasyCalculator.GetDirection(pos, playerPos);
+            moveDirection = dirToPlayer;
         }
     }
 
@@ -128,7 +133,28 @@ public class CustomError : Error
 
     void GliderFrame()
     {
+        float moveDistance = currentAbilityDic[BasicAbility.MOVE_SPEED] * Time.fixedDeltaTime;
+        
+        float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
 
+        float disToPlayer = Vector2.Distance(Player.player.transform.position, transform.position);
+
+        //moveDirection = VEasyCalculator.GetLerpDirection(
+        //    moveDirection, dirToPlayer, currentAbilityDic[BasicAbility.TURN_AMOUNT] * Time.fixedDeltaTime,
+        //    2f, 0.5f, disToPlayer, 0.2f);
+
+        moveDirection = VEasyCalculator.GetTurningDirection(
+            moveDirection, dirToPlayer, currentAbilityDic[BasicAbility.TURN_AMOUNT] * Time.fixedDeltaTime,
+            2f, 0.5f, disToPlayer, 60f * Time.fixedDeltaTime);
+
+        Vector2 moveVector = VEasyCalculator.GetRotatedPosition(moveDirection, moveDistance);
+
+        Vector3 rot = transform.eulerAngles;
+        rot.z = moveDirection + SpriteManager.spriteDefaultRotation;
+        transform.eulerAngles = rot;
+
+        Vector2 v2Pos = transform.position;
+        transform.position = v2Pos + moveVector;
     }
 
     //
