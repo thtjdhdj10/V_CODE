@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class ControlableUnit : MonoBehaviour {
-
-    public Player player;
-
+public class PlayerMove : ControlableUnit
+{
     public bool[] moveDir = new bool[4];
 
     public float moveSpeed = 2f;
@@ -23,18 +21,18 @@ public class ControlableUnit : MonoBehaviour {
 
     Vector2 moveDelta;
 
-    public virtual void ReceiveCommand(KeyManager.Command command, KeyManager.KeyPressType type)
+    public override void ReceiveCommand(KeyManager.Command command, KeyManager.KeyPressType type)
     {
-        // 눌린 키와 대응되는 명령 command 와 눌리는 방식 type 에 대응되는 행동을 정의할 것.
-
         UpdateMoveState(command, type);
 
-//        Debug.Log(gameObject.name + "->" + command + " " + type);
+
     }
 
-    void Awake()
+    protected override void Awake()
     {
-        player = GetComponent<Player>();
+        base.Awake();
+
+        owner = GetComponent<Player>();
 
         dirKeyDic[Direction.LEFT] = KeyManager.Command.MOVE_LEFT;
         dirKeyDic[Direction.RIGHT] = KeyManager.Command.MOVE_RIGHT;
@@ -86,25 +84,25 @@ public class ControlableUnit : MonoBehaviour {
 
     void MoveFrame()
     {
-	    int dirCount = 0;
+        int dirCount = 0;
 
-	    for (int d = 0; d < 4; ++d)
-	    {
+        for (int d = 0; d < 4; ++d)
+        {
             if (moveDir[d] == true)
-		    {
-			    dirCount++;
-		    }
-	    }
+            {
+                dirCount++;
+            }
+        }
 
         float moveDelta = moveSpeed * Time.deltaTime;
 
-	    if (dirCount >= 2)
-	    {
+        if (dirCount >= 2)
+        {
             moveDelta /= Mathf.Sqrt(2f);
-	    }
+        }
 
         Vector2 delta = new Vector2(0f, 0f);
-        if(moveDir[(int)Direction.LEFT] == true)
+        if (moveDir[(int)Direction.LEFT] == true)
         {
             delta.x -= moveDelta;
         }
@@ -112,16 +110,15 @@ public class ControlableUnit : MonoBehaviour {
         {
             delta.x += moveDelta;
         }
-        if(moveDir[(int)Direction.UP] == true)
+        if (moveDir[(int)Direction.UP] == true)
         {
             delta.y += moveDelta;
         }
-        else if(moveDir[(int)Direction.DOWN] == true)
+        else if (moveDir[(int)Direction.DOWN] == true)
         {
             delta.y -= moveDelta;
         }
 
-        player.ShiftPosition(delta);
+        ((Player)owner).ShiftPosition(delta);
     }
-
 }

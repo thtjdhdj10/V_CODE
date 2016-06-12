@@ -78,7 +78,6 @@ public abstract class Enemy : Unit
     {
         HEALTH_POINT = 0,
         IMPORTANCE,
-        LOGICAL_SIZE,
         MOVE_SPEED,
         TURN_AMOUNT,
     }

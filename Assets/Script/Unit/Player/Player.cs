@@ -8,6 +8,8 @@ public class Player : Unit
     void Awake()
     {
         player = this;
+
+        force = Force.PLAYER;
     }
 
     public void ShiftPosition(Vector2 delta)

@@ -68,15 +68,13 @@ public class KeyManager : MonoBehaviour {
     void GiveCommand()
     {
         // ControlableUnit Component 를 가진 모든 GameObject 를 찾는다.
-        List<GameObject> controlableUnitList = new List<GameObject>();
+        List<ControlableUnit> controlableUnitList = OperateUnit.controlableUnitList;
 
-        ControlableUnit[] unitArr = FindObjectsOfType<ControlableUnit>();
-        for (int i = 0; i < unitArr.Length; ++i)
-        {
-            controlableUnitList.Add(unitArr[i].gameObject);
-        }
-        // 매번 찾는건 비효율적이니, ControlableUnit 가 추가될 때 ObjectPooler 에서 관리하도록 하고,
-        // 그것들을 가져와서 사용하는 것으로 수정.
+        //ControlableUnit[] unitArr = FindObjectsOfType<ControlableUnit>();
+        //for (int i = 0; i < unitArr.Length; ++i)
+        //{
+        //    controlableUnitList.Add(unitArr[i].gameObject);
+        //}
 //               VEasyPoolerManager.RefObjectListAtLayer(LayerManager.StringToMask("Controlable"));
 
         if (controlableUnitList.Count == 0)
@@ -100,13 +98,12 @@ public class KeyManager : MonoBehaviour {
                 // 모든 ControlableUnit 에게 <command, pressType> 을 넘겨준다.
                 for (int j = 0; j < controlableUnitList.Count; ++j)
                 {
-                    var controler = controlableUnitList[j].GetComponent<ControlableUnit>();
-                    if (controler == null)
+                    if (controlableUnitList[j] == null)
                         continue;
 
                     Command command = keySettings[keySetNumber][keyCode];
 
-                    controler.ReceiveCommand(command, pressType);
+                    controlableUnitList[j].ReceiveCommand(command, pressType);
                 }
             }
         }

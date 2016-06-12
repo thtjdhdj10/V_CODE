@@ -3,7 +3,31 @@ using System.Collections.Generic;
 
 public class Unit : MonoBehaviour
 {
+    public float logicalSize;
+
+    protected HittableUnit hittableUnit;
+    protected BeHittableUnit beHittableUnit;
+    protected MovingUnit movingUnit;
+    protected ControlableUnit controlableUnit;
+
+    public enum Force
+    {
+        ENEMY,
+        PLAYER,
+        NONE,
+    }
+
+    public Force force = Force.ENEMY;
+
     //
+
+    protected virtual void Awake()
+    {
+        hittableUnit = GetComponent<HittableUnit>();
+        beHittableUnit = GetComponent<BeHittableUnit>();
+        movingUnit = GetComponent<MovingUnit>();
+        controlableUnit = GetComponent<ControlableUnit>();
+    }
 
     public virtual void Init()
     {
@@ -25,31 +49,31 @@ public class Unit : MonoBehaviour
         return false;
     }
 
-    protected ControlableUnit.Direction CheckTerritory(Vector2 pos, float size)
+    protected PlayerMove.Direction CheckTerritory(Vector2 pos, float size)
     {
         Rect rect = CameraManager.manager.GetLogicalRect();
 
         if (pos.x - size < rect.xMin)
         {
-            return ControlableUnit.Direction.LEFT;
+            return PlayerMove.Direction.LEFT;
         }
 
         if (pos.x + size > rect.xMax)
         {
-            return ControlableUnit.Direction.RIGHT;
+            return PlayerMove.Direction.RIGHT;
         }
 
         if (pos.y - size < rect.yMin)
         {
-            return ControlableUnit.Direction.DOWN;
+            return PlayerMove.Direction.DOWN;
         }
 
         if (pos.y + size > rect.yMax)
         {
-            return ControlableUnit.Direction.UP;
+            return PlayerMove.Direction.UP;
         }
 
-        return ControlableUnit.Direction.NONE;
+        return PlayerMove.Direction.NONE;
     }
 
 }

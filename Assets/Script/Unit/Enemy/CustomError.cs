@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class CustomError : Error
 {
     public Weapon weapon;
     public Body body;
-
-    public float moveDirection;
 
     public enum Weapon
     {
@@ -45,7 +43,17 @@ public class CustomError : Error
 
         SetColorPerHealth();
 
+        if (BodyTypeOperateDic.ContainsKey(body) == true)
+            BodyTypeOperateDic[body]();
 
+        logicalSize = 0.12f;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        FuncDicMatch();
     }
 
     void Start()
@@ -55,62 +63,80 @@ public class CustomError : Error
 
     void FixedUpdate()
     {
-        BodyFrame();
+        if (BodyTypeFrameDic.ContainsKey(body) == true)
+            BodyTypeFrameDic[body]();
 
-        WeaponFrame();
+        if (WeaponTypeFrameDic.ContainsKey(weapon) == true)
+            WeaponTypeFrameDic[weapon]();
     }
 
     void Update()
     {
+
 
         UpdateSpriteColor();
     }
 
     //
 
-    void BodyFrame()
+    delegate void OperateInit();
+
+    Dictionary<Body, OperateInit> BodyTypeOperateDic = new Dictionary<Body, OperateInit>();
+
+    void CircleInit()
     {
-        switch (body)
-        {
-            case Body.BELL:
-            case Body.POWER_BELL:
-                {
-                    BellFrame();
-                }
-                break;
-            case Body.CIRCLE:
-            case Body.POWER_CIRCLE:
-                {
-                    CircleFrame();
-                }
-                break;
-            case Body.SQUARE:
-            case Body.POWER_SQUARE:
-                {
-                    SquareFrame();
-                }
-                break;
-            case Body.GLIDER:
-                {
-                    GliderFrame();
-                }
-                break;
-        }
+        if (movingUnit == null)
+            return;
+
+        movingUnit.target = Player.player;
+        movingUnit.moveType = MovingUnit.MoveType.STRAIGHT;
+        
+        float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
+        movingUnit.moveDirection = dirToPlayer;
+        movingUnit.moveSpeed = currentAbilityDic[BasicAbility.MOVE_SPEED];
     }
 
-    void BellFrame()
+    void GliderInit()
     {
+        if (movingUnit == null)
+            return;
 
+        movingUnit.target = Player.player;
+        movingUnit.moveType = MovingUnit.MoveType.REGULAR_CURVE_PER_DISTANCE;
+
+        float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
+        movingUnit.moveDirection = dirToPlayer;
+        movingUnit.moveSpeed = currentAbilityDic[BasicAbility.MOVE_SPEED];
+        movingUnit.curveFactor = currentAbilityDic[BasicAbility.TURN_AMOUNT];
+        movingUnit.maxCurveDistance = 2f;
+        movingUnit.minCurveDistance = 0.5f;
+        movingUnit.distanceFactor = 60f;
     }
+
+    //
+
+    void FuncDicMatch()
+    {
+        BodyTypeOperateDic[Body.CIRCLE] = CircleInit;
+        BodyTypeOperateDic[Body.POWER_CIRCLE] = CircleInit;
+        BodyTypeOperateDic[Body.GLIDER] = GliderInit;
+
+        BodyTypeFrameDic[Body.CIRCLE] = CircleFrame;
+        BodyTypeFrameDic[Body.POWER_CIRCLE] = CircleFrame;
+        BodyTypeFrameDic[Body.GLIDER] = GliderFrame;
+
+        WeaponTypeFrameDic[Weapon.BAZOOKA] = BazookaFrame;
+        WeaponTypeFrameDic[Weapon.BOLT] = BoltFrame;
+        WeaponTypeFrameDic[Weapon.LASER] = LaserFrame;
+        WeaponTypeFrameDic[Weapon.LAUNCHER] = LauncherFrame;
+    }
+
+    delegate void Frame();
+
+    Dictionary<Body, Frame> BodyTypeFrameDic = new Dictionary<Body, Frame>();
 
     void CircleFrame()
     {
-        float moveDistance = currentAbilityDic[BasicAbility.MOVE_SPEED] * Time.fixedDeltaTime;
-
-        Vector2 moveVector = VEasyCalculator.GetRotatedPosition(moveDirection, moveDistance);
-        Vector2 v2Pos = transform.position;
-        transform.position = v2Pos + moveVector;
-
         float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
 
         if (weapon != Weapon.SPEAR)
@@ -120,78 +146,29 @@ public class CustomError : Error
             transform.eulerAngles = rot;
         }
 
-        if (CheckTerritory(v2Pos, currentAbilityDic[BasicAbility.LOGICAL_SIZE]) != ControlableUnit.Direction.NONE)
+        if (CheckTerritory(transform.position, logicalSize) != PlayerMove.Direction.NONE)
         {
-            moveDirection = dirToPlayer;
+            movingUnit.moveDirection = dirToPlayer;
         }
-    }
-
-    void SquareFrame()
-    {
-
     }
 
     void GliderFrame()
     {
-        float moveDistance = currentAbilityDic[BasicAbility.MOVE_SPEED] * Time.fixedDeltaTime;
-        
-        float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
-
-        float disToPlayer = Vector2.Distance(Player.player.transform.position, transform.position);
-
-        //moveDirection = VEasyCalculator.GetLerpDirection(
-        //    moveDirection, dirToPlayer, currentAbilityDic[BasicAbility.TURN_AMOUNT] * Time.fixedDeltaTime,
-        //    2f, 0.5f, disToPlayer, 0.2f);
-
-        moveDirection = VEasyCalculator.GetTurningDirection(
-            moveDirection, dirToPlayer, currentAbilityDic[BasicAbility.TURN_AMOUNT] * Time.fixedDeltaTime,
-            2f, 0.5f, disToPlayer, 60f * Time.fixedDeltaTime);
-
-        Vector2 moveVector = VEasyCalculator.GetRotatedPosition(moveDirection, moveDistance);
-
         Vector3 rot = transform.eulerAngles;
-        rot.z = moveDirection + SpriteManager.spriteDefaultRotation;
+        rot.z = movingUnit.moveDirection + SpriteManager.spriteDefaultRotation;
         transform.eulerAngles = rot;
-
-        Vector2 v2Pos = transform.position;
-        transform.position = v2Pos + moveVector;
     }
 
     //
 
-    void WeaponFrame()
-    {
-        switch(weapon)
-        {
-            case Weapon.BOLT:
-                {
-                    BoltFrame();
-                }
-                break;
-            case Weapon.LAUNCHER:
-                {
-                    LauncherFrmae(); 
-                }
-                break;
-            case Weapon.LASER:
-                {
-                    LaserFrame();
-                }
-                break;
-            case Weapon.BAZOOKA:
-                {
-                    Bazooka();
-                }
-                break;
-        }
-    }
+    Dictionary<Weapon, Frame> WeaponTypeFrameDic = new Dictionary<Weapon, Frame>();
 
     void BoltFrame()
     {
 
     }
 
-    void LauncherFrmae()
+    void LauncherFrame()
     {
 
     }
@@ -201,7 +178,7 @@ public class CustomError : Error
 
     }
 
-    void Bazooka()
+    void BazookaFrame()
     {
 
     }

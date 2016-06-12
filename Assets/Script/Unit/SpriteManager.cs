@@ -257,6 +257,7 @@ public class SpriteManager : MonoBehaviour {
         LASER,
         RUPTURE,
         SCRATCH,
+        PLAYER_BULLET,
 
         // body
         CIRCLE,
@@ -289,6 +290,7 @@ public class SpriteManager : MonoBehaviour {
         A,
         WING,
         TURRET,
+
     }
 
     public enum Status
@@ -363,6 +365,8 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["analog_timer"] = Name.ANALOG_TIMER;
         strNameDic["turret"] = Name.TURRET;
         strNameDic["wing"] = Name.WING;
+
+        strNameDic["player_bullet"] = Name.PLAYER_BULLET;
 
         nameKeywordList = new List<string>(strNameDic.Keys);
 

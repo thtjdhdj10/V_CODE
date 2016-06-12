@@ -18,9 +18,8 @@ public class AbilityManager {
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 60f;
                     abilityDic[Enemy.BasicAbility.IMPORTANCE] = 0f;
-                    abilityDic[Enemy.BasicAbility.LOGICAL_SIZE] = 0.12f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 0f;
-                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 1f;
+                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 90f;
                     
                     abilityFactorDic[Enemy.BasicAbility.HEALTH_POINT] = 30f;
                 }
@@ -29,11 +28,8 @@ public class AbilityManager {
             case CustomError.Body.POWER_CIRCLE:
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 40f;
-                    abilityDic[Enemy.BasicAbility.LOGICAL_SIZE] = 0.12f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 1.5f;
-                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 1f;
-                    if (weapon == CustomError.Weapon.SPEAR)
-                        abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0f;
+                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0f;
                     
                     abilityFactorDic[Enemy.BasicAbility.HEALTH_POINT] = 20f;
                     abilityFactorDic[Enemy.BasicAbility.MOVE_SPEED] = 0.35f;
@@ -44,7 +40,6 @@ public class AbilityManager {
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 80f;
                     abilityDic[Enemy.BasicAbility.IMPORTANCE] = 0f;
-                    abilityDic[Enemy.BasicAbility.LOGICAL_SIZE] = 0.12f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 0f;
                     abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0f;
 
@@ -54,13 +49,12 @@ public class AbilityManager {
             case CustomError.Body.GLIDER:
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 20f;
-                    abilityDic[Enemy.BasicAbility.LOGICAL_SIZE] = 0.12f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 2.5f;
                     abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 60f;
 
                     abilityFactorDic[Enemy.BasicAbility.HEALTH_POINT] = 20f;
                     abilityFactorDic[Enemy.BasicAbility.MOVE_SPEED] = 0.5f;
-                    abilityFactorDic[Enemy.BasicAbility.TURN_AMOUNT] = 0.015f;
+                    abilityFactorDic[Enemy.BasicAbility.TURN_AMOUNT] = 8f;
                 }
                 break;
             default:
