@@ -197,6 +197,16 @@ public class VEasyPoolerManager : MonoBehaviour
 
     // get finite
 
+    public static GameObject GetFiniteParticleRequest(string name)
+    {
+        GameObject obj = GetFiniteObjectRequest(name, 0f);
+        ParticleSystem ps = obj.GetComponent<ParticleSystem>();
+        float lifeTime = ps.duration + ps.startLifetime;
+        obj.GetComponent<ObjectState>().SetReleaseTimer(lifeTime);
+
+        return obj;
+    }
+
     public static GameObject GetFiniteObjectRequest(string name, float lifeTime)
     {
         List<GameObject> list = GetFiniteObjectListRequest(name, 1, true, lifeTime);
@@ -297,14 +307,14 @@ public class VEasyPoolerManager : MonoBehaviour
         if (obj == null)
         {
             Debug.LogWarning("release request fail");
+            Debug.LogWarning("wrong request. List : null");
             return;
         }
 
         if (obj.Count == 0)
         {
             Debug.LogWarning("release request fail");
-            Debug.LogWarning("wrong release request");
-            Debug.LogWarning("this list.Count is zero");
+            Debug.LogWarning("wrong request. List.Count : 0");
             return;
         }
         
@@ -312,7 +322,13 @@ public class VEasyPoolerManager : MonoBehaviour
         if (state == null)
         {
             Debug.LogWarning("release request fail");
-            Debug.LogError(obj[0].name + " have not ObjectState script");
+            Debug.LogWarning(obj[0].name + " have not ObjectState script");
+
+            for (int i = 0; i < obj.Count;++i )
+            {
+                Destroy(obj[i]);
+            }
+
             return;
         }
         
@@ -320,7 +336,13 @@ public class VEasyPoolerManager : MonoBehaviour
         if(IsValidArgs(name) == false)
         {
             Debug.LogWarning("release request fail");
-            Debug.LogError("\"" + name + "\" is unvalid key");
+            Debug.LogWarning("\"" + name + "\" is invalid key");
+
+            for (int i = 0; i < obj.Count; ++i)
+            {
+                Destroy(obj[i]);
+            }
+
             return;
         }
 

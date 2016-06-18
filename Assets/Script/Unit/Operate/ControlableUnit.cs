@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 public class ControlableUnit : OperateUnit
 {
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         controlableUnitList.Add(this);
     }
 

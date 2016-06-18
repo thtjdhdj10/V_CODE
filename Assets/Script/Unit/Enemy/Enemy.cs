@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 // pure virtual class
@@ -6,9 +7,72 @@ public abstract class Enemy : Unit
 {
     public float power = 0f;
 
-    public override void Init()
+    public void CreateUnit(float createTime)
     {
+        unitActive = false;
 
+        StartCoroutine(ActionCreateUnit(createTime));
+    }
+
+    public void ReleaseUnit(float releaseTime)
+    {
+        unitActive = false;
+
+        StartCoroutine(ActionReleaseUnit(releaseTime));
+    }
+
+    protected virtual IEnumerator ActionCreateUnit(float createTime)
+    {
+        float remainTime = createTime;
+
+        while (remainTime > 0f)
+        {
+            remainTime -= Time.deltaTime;
+
+            float ratio = 1f - remainTime / createTime;
+            ratio = 0.5f + ratio * 0.5f;
+
+            for (int i = 0; i < spriteList.Count;++i )
+            {
+                Color color = spriteList[i].color;
+                color.a = ratio;
+                spriteList[i].color = color;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        unitActive = true;
+
+        yield break;
+    }
+
+    protected virtual IEnumerator ActionReleaseUnit(float releaseTime)
+    {
+        float remainTime = releaseTime;
+
+        while (remainTime > 0f)
+        {
+            remainTime -= Time.deltaTime;
+
+            float ratio = remainTime / releaseTime;
+            ratio = ratio * ratio;
+
+            for (int i = 0; i < spriteList.Count; ++i)
+            {
+                Color color = spriteList[i].color;
+                color.a = ratio;
+                spriteList[i].color = color;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        unitActive = false;
+
+        VEasyPoolerManager.ReleaseObjectRequest(gameObject);
+
+        yield break;
     }
 
     //
@@ -19,10 +83,6 @@ public abstract class Enemy : Unit
     public Dictionary<BasicAbility, float> originalAbilityDic = new Dictionary<BasicAbility, float>();
     public Dictionary<BasicAbility, float> abilityFactorDic = new Dictionary<BasicAbility, float>();
     public Dictionary<BasicAbility, float> currentAbilityDic = new Dictionary<BasicAbility, float>();
-
-    public List<Dictionary<AttackAbility, float>> originalAttackAbilityDicList = new List<Dictionary<AttackAbility, float>>();
-    public List<Dictionary<AttackAbility, float>> attackAbilityFactorDicList = new List<Dictionary<AttackAbility, float>>();
-    public List<Dictionary<AttackAbility, float>> currentAttackAbilityDicList = new List<Dictionary<AttackAbility, float>>();
 
     //
 
@@ -63,13 +123,22 @@ public abstract class Enemy : Unit
         Color c = healthColorDic[GetHealth()];
         for (int i = 0; i < spriteList.Count; ++i)
         {
+            float alpha = spriteList[i].color.a;
+
+            c.a = alpha;
             spriteList[i].color = c;
         }
     }
 
-    //
+    protected void SpriteSetting()
+    {
+        spriteList.Clear();
 
-    // update attack delay
+        SpriteRenderer[] sr = GetComponentsInChildren<SpriteRenderer>();
+        spriteList.AddRange(sr);
+    }
+
+    //
 
     //
 
@@ -81,51 +150,6 @@ public abstract class Enemy : Unit
         MOVE_SPEED,
         TURN_AMOUNT,
     }
-
-    public enum AttackAbility
-    {
-        //ATTACK_DAMAGE = 0,
-        ATTACK_DELAY = 0,
-        TRIGGER_DELAY,
-        PROJECTILE_SPEED,
-        ACCELERATION_PER_SEC,
-        EXPLOSION_RANGE,
-        TURN_AMOUNT,
-        MIN_ATTACK_RANGE,
-        MAX_ATTACK_RANGE,
-        RELATIVE_POSITION_X,
-        RELATIVE_POSITION_Y,
-        ATTACK_DIRECTION,
-    }
-
-    //public void ResetBasicAbility(Dictionary<BasicAbility, float> abilityDic)
-    //{
-    //    abilityDic[BasicAbility.HEALTH_POINT] = 0f;
-    //    abilityDic[BasicAbility.IMPORTANCE] = 0f;
-    //    abilityDic[BasicAbility.LOGICAL_SIZE] = 0f;
-    //    abilityDic[BasicAbility.MOVE_SPEED] = 0f;
-    //    abilityDic[BasicAbility.TURN_AMOUNT] = 0f;
-    //}
-
-    //public void ResetAttackAbility(Dictionary<AttackAbility, float> abilityDic)
-    //{
-    //    abilityDic[AttackAbility.ATTACK_DAMAGE] = 0f;
-    //    abilityDic[AttackAbility.MIN_ATTACK_RANGE] = 0f;
-    //    abilityDic[AttackAbility.ATTACK_START_RANGE] = 0f;
-    //    abilityDic[AttackAbility.MAX_ATTACK_RANGE] = 0f;
-    //    abilityDic[AttackAbility.ATTACK_DELAY] = 0f;
-    //    abilityDic[AttackAbility.ATTACK_DIRECTION] = 0f;
-    //    abilityDic[AttackAbility.RELATIVE_POSITION_X] = 0f;
-    //    abilityDic[AttackAbility.RELATIVE_POSITION_Y] = 0f;
-    //}
-
-    //public void ResetAttackAbility(List<Dictionary<AttackAbility, float>> abilityDicList)
-    //{
-    //    for (int i = 0; i < abilityFactorDic.Count; ++i)
-    //    {
-    //        ResetAttackAbility(abilityDicList[i]);
-    //    }
-    //}
 
     public void CurrentBasicAbilityInit(float power)
     {
@@ -144,35 +168,6 @@ public abstract class Enemy : Unit
         }
     }
 
-    public void CurrentAttackAbilityInit(float power)
-    {
-        currentAttackAbilityDicList.Clear();
-
-        for (int i = 0; i < originalAttackAbilityDicList.Count; ++i)
-        {
-            currentAttackAbilityDicList.Add(new Dictionary<AttackAbility,float>());
-
-            foreach (var ability in originalAttackAbilityDicList[i].Keys)
-            {
-                float factor = 0f;
-
-                if (attackAbilityFactorDicList[i].ContainsKey(ability) == true)
-                {
-                    if (ability == AttackAbility.ATTACK_DELAY)
-                    {
-                        // power = 1, factor = 0.25 일 때 80% delay
-                        factor = originalAttackAbilityDicList[i][ability] /
-                            (1 + attackAbilityFactorDicList[i][ability] * power)
-                            - originalAttackAbilityDicList[i][ability];
-                    }
-                    factor = attackAbilityFactorDicList[i][ability] * power;
-                }
-
-                currentAttackAbilityDicList[i][ability] = attackAbilityFactorDicList[i][ability] + factor;
-            }
-        }
-    }
-
     //
 
     // Enemy 의 기본 속성을 초기화
@@ -180,26 +175,17 @@ public abstract class Enemy : Unit
     {
         AbilityManager.GetAbility(originalAbilityDic, abilityFactorDic, body, weapon);
         CurrentBasicAbilityInit(power);
-
-        AbilityManager.GetAttackAbility(originalAttackAbilityDicList, attackAbilityFactorDicList, body, weapon);
-        CurrentAttackAbilityInit(power);
     }
 
     public virtual void SetAbility(float power, Virus.Type type)
     {
         AbilityManager.GetAbility(originalAbilityDic, abilityFactorDic, type);
         CurrentBasicAbilityInit(power);
-
-        AbilityManager.GetAttackAbility(originalAttackAbilityDicList, attackAbilityFactorDicList, type);
-        CurrentAttackAbilityInit(power);
     }
 
     public virtual void SetAbility(float power, SpecialError.Type type)
     {
         AbilityManager.GetAbility(originalAbilityDic, abilityFactorDic, type);
         CurrentBasicAbilityInit(power);
-
-        AbilityManager.GetAttackAbility(originalAttackAbilityDicList, attackAbilityFactorDicList, type);
-        CurrentAttackAbilityInit(power);
     }
 }

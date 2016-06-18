@@ -35,13 +35,18 @@ public class VEasyCalculator {
         return true;
     }
 
+    public static float GetDirection(Unit from, Unit to)
+    {
+        return GetDirection(from.transform.position, to.transform.position);
+    }
+
     public static float GetDirection(Vector2 from, Vector2 to)
     {
         Vector2 v2 = (to - from).normalized;
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
 
-    public static float GetTurningDirection(float from, float to, float degrees)
+    public static float GetDirectionDelta(ref float from, ref float to)
     {
         GetNormalizedDirection(ref from);
         GetNormalizedDirection(ref to);
@@ -53,7 +58,27 @@ public class VEasyCalculator {
         else if (delta < -180f)
             to += 360f;
 
-        float completeDelta = to - from;
+        return to - from;
+    }
+
+    public static float GetDirectionDelta(float from, float to)
+    {
+        GetNormalizedDirection(ref from);
+        GetNormalizedDirection(ref to);
+
+        float delta = to - from;
+
+        if (delta >= 180f)
+            from += 360f;
+        else if (delta < -180f)
+            to += 360f;
+
+        return to - from;
+    }
+
+    public static float GetTurningDirection(float from, float to, float degrees)
+    {
+        float completeDelta = GetDirectionDelta(ref from, ref to);
 
         if (completeDelta >= 0f)
         {
@@ -80,17 +105,8 @@ public class VEasyCalculator {
 
     public static float GetLerpDirection(float from, float to, float factor)
     {
-        GetNormalizedDirection(ref from);
-        GetNormalizedDirection(ref to);
+        float completeDelta = GetDirectionDelta(ref from, ref to);
 
-        float delta = to - from;
-
-        if (delta >= 180f)
-            from += 360f;
-        else if (delta < -180f)
-            to += 360f;
-
-        float completeDelta = to - from;
         float lerpedDegrees = to * factor + from * (1f - factor);
 
         if (completeDelta >= 0f)
@@ -149,5 +165,27 @@ public class VEasyCalculator {
         Vector2 targetMoveSpeed = (targetPos - targetPrevPos) / analyzingTime;
 
         return targetPos + (targetMoveSpeed * collisionTime);
+    }
+
+    public static float EstimateCollidingDirection(float dir, float prevDir, float analyzingTime, float collisionTime)
+    {
+        float rotateDegrees = GetDirectionDelta(prevDir, dir);
+
+        float rotateSpeed = rotateDegrees / analyzingTime;
+
+        float estimatedDirection = dir + rotateSpeed * collisionTime;
+
+        GetNormalizedDirection(ref estimatedDirection);
+
+        return estimatedDirection;
+    }
+
+    public static float EstimateCollidingDistance(float dis, float prevDis, float analyzingTime, float collisionTime)
+    {
+        float moveDistance = dis - prevDis;
+
+        float moveSpeed = moveDistance / analyzingTime;
+
+        return dis + moveSpeed * collisionTime;
     }
 }

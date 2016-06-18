@@ -5,11 +5,22 @@ public class Player : Unit
 {
     public static Player player;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        unitActive = true;
+
+        logicalSize = 0.1f;
+
         player = this;
 
         force = Force.PLAYER;
+    }
+
+    public void BeHit(Unit target)
+    {
+        Debug.Log(target.name + " Hit Player");
     }
 
     public void ShiftPosition(Vector2 delta)

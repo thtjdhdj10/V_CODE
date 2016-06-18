@@ -86,7 +86,7 @@ public class VEasyPooler : MonoBehaviour
 
         if (prefab == null)
         {
-            Debug.LogWarning("\"" + originName + "\" is unvalid prefab name");
+            Debug.LogWarning("\"" + originName + "\" is invalid prefab name");
             originName = null;
             return;
         }

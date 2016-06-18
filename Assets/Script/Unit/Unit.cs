@@ -3,12 +3,20 @@ using System.Collections.Generic;
 
 public class Unit : MonoBehaviour
 {
+    public bool unitActive = true;
+
     public float logicalSize;
 
-    protected HittableUnit hittableUnit;
-    protected BeHittableUnit beHittableUnit;
-    protected MovingUnit movingUnit;
-    protected ControlableUnit controlableUnit;
+    [System.NonSerialized]
+    public HittableUnit hittableUnit;
+    [System.NonSerialized]
+    public BeHittableUnit beHittableUnit;
+    [System.NonSerialized]
+    public MovingUnit movingUnit;
+    [System.NonSerialized]
+    public ControlableUnit controlableUnit;
+    [System.NonSerialized]
+    public ProjectileUnit projectileUnit;
 
     public enum Force
     {
@@ -27,6 +35,25 @@ public class Unit : MonoBehaviour
         beHittableUnit = GetComponent<BeHittableUnit>();
         movingUnit = GetComponent<MovingUnit>();
         controlableUnit = GetComponent<ControlableUnit>();
+        projectileUnit = GetComponent<ProjectileUnit>();
+    }
+
+    public void OperateComponentInit(bool hit, bool beHit, bool moving, bool control, bool projectile)
+    {
+        if (hit && hittableUnit == null)
+            hittableUnit = gameObject.AddComponent<HittableUnit>();
+
+        if (beHit && beHittableUnit == null)
+            beHittableUnit = gameObject.AddComponent<BeHittableUnit>();
+
+        if (moving && movingUnit == null)
+            movingUnit = gameObject.AddComponent<MovingUnit>();
+
+        if (control && controlableUnit == null)
+            controlableUnit = gameObject.AddComponent<ControlableUnit>();
+
+        if (projectile && projectileUnit == null)
+            projectileUnit = gameObject.AddComponent<ProjectileUnit>();
     }
 
     public virtual void Init()
@@ -34,14 +61,20 @@ public class Unit : MonoBehaviour
 
     }
 
-    protected bool CheckOutside(Vector2 pos, float size)
+    public virtual void Hit(Unit target)
     {
+
+    }
+
+    protected bool CheckOutside()
+    {
+        Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();
 
-        if(pos.x + size < rect.xMin||
-            pos.x - size > rect.xMax ||
-            pos.y + size < rect.yMin ||
-            pos.y - size > rect.yMax)
+        if(pos.x + logicalSize < rect.xMin||
+            pos.x - logicalSize > rect.xMax ||
+            pos.y + logicalSize < rect.yMin ||
+            pos.y - logicalSize > rect.yMax)
         {
             return true;
         }
@@ -49,26 +82,27 @@ public class Unit : MonoBehaviour
         return false;
     }
 
-    protected PlayerMove.Direction CheckTerritory(Vector2 pos, float size)
+    protected PlayerMove.Direction CheckTerritory()
     {
+        Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();
 
-        if (pos.x - size < rect.xMin)
+        if (pos.x - logicalSize < rect.xMin)
         {
             return PlayerMove.Direction.LEFT;
         }
 
-        if (pos.x + size > rect.xMax)
+        if (pos.x + logicalSize > rect.xMax)
         {
             return PlayerMove.Direction.RIGHT;
         }
 
-        if (pos.y - size < rect.yMin)
+        if (pos.y - logicalSize < rect.yMin)
         {
             return PlayerMove.Direction.DOWN;
         }
 
-        if (pos.y + size > rect.yMax)
+        if (pos.y + logicalSize > rect.yMax)
         {
             return PlayerMove.Direction.UP;
         }

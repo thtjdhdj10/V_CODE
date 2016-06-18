@@ -10,6 +10,13 @@ public class OperateUnit : MonoBehaviour {
     public static List<BeHittableUnit> beHittableUnitList = new List<BeHittableUnit>();
     public static List<MovingUnit> movingUnitList = new List<MovingUnit>();
 
+    protected virtual void Awake()
+    {
+        owner = GetComponent<Unit>();
+        if (owner == null)
+            Destroy(this);
+    }
+
     protected bool ConfirmExistence()
     {
         if (owner == null ||

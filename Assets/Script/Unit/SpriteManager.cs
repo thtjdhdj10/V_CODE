@@ -14,6 +14,17 @@ public class SpriteManager : MonoBehaviour {
 
     public static float spriteDefaultRotation = -90f;
 
+    public static int spriteDefaultFramePerSec = 12;
+
+    public static SpriteManager manager;
+
+    void Awake()
+    {
+        manager = this;
+
+        LoadSprite();
+    }
+
     public TypeSpriteDictionary typeSpriteDic = new TypeSpriteDictionary();
 
     public struct SpriteAttribute
@@ -21,6 +32,7 @@ public class SpriteManager : MonoBehaviour {
         public Sprite sprite;
         public float speed;
         public int frameCount;
+        public float cycle;
     }
 
     private Dictionary<string, Category> strCategoryDic = new Dictionary<string, Category>();
@@ -83,6 +95,7 @@ public class SpriteManager : MonoBehaviour {
 
                 sa.frameCount = GetSpriteFrameCount(strType);
                 sa.speed = GetSpriteSpeed(strType, sa.frameCount);
+                sa.cycle = (1f / (float)spriteDefaultFramePerSec) / sa.speed * (float)(sa.frameCount - 1);
 
                 CutSpriteAttribute(ref strType);
                 
@@ -99,7 +112,7 @@ public class SpriteManager : MonoBehaviour {
 
                 if(strCategoryDic.ContainsKey(strType[0]) == false)
                 {
-                    CustomLog.CompleteLogWarning(
+                    CustomLog.CompleteLog(
                         "Invalid Category: " + strType[0],
                         PRINT_DEBUG);
 
@@ -108,7 +121,7 @@ public class SpriteManager : MonoBehaviour {
                 
                 if(strNameDic.ContainsKey(strType[1]) == false)
                 {
-                    CustomLog.CompleteLogWarning(
+                    CustomLog.CompleteLog(
                         "Invalid Name: " + strType[1],
                         PRINT_DEBUG);
 
@@ -117,7 +130,7 @@ public class SpriteManager : MonoBehaviour {
                 
                 if(strStatusDic.ContainsKey(strType[2]) == false)
                 {
-                    CustomLog.CompleteLogWarning(
+                    CustomLog.CompleteLog(
                         "Invalid Status: " + strType[2],
                         PRINT_DEBUG);
 
@@ -130,17 +143,28 @@ public class SpriteManager : MonoBehaviour {
                 Name name = strNameDic[strType[1]];
                 Status status = strStatusDic[strType[2]];
 
-                // TODO 이부분의 코드 정리
-                Dictionary<Status, SpriteAttribute> d = new Dictionary<Status, SpriteAttribute>();
-                Dictionary<Name, Dictionary<Status, SpriteAttribute>> dd = new Dictionary<Name, Dictionary<Status, SpriteAttribute>>();
-                d[status] = sa;
-                dd[name] = d;
-                typeSpriteDic[category] = dd;
+                //// TODO 이부분의 코드 정리
+                //Dictionary<Status, SpriteAttribute> d = new Dictionary<Status, SpriteAttribute>();
+                //Dictionary<Name, Dictionary<Status, SpriteAttribute>> dd = new Dictionary<Name, Dictionary<Status, SpriteAttribute>>();
+                //d[status] = sa;
+                //dd[name] = d;
+                if (typeSpriteDic.ContainsKey(category) == false)
+                    typeSpriteDic.Add(category, new Dictionary<Name, Dictionary<Status, SpriteAttribute>>());
+                if (typeSpriteDic[category].ContainsKey(name) == false)
+                    typeSpriteDic[category].Add(name, new Dictionary<Status, SpriteAttribute>());
+                if (typeSpriteDic[category][name].ContainsKey(status) == false)
+                    typeSpriteDic[category][name].Add(status, sa);
                 ++countLoadSprite;
             }
         }
 
         CustomLog.CompleteLog("Load Sprite Count: " + countLoadSprite);
+    }
+
+    public static void SetSpriteCycleTime(ref SpriteAttribute sa, float time)
+    {
+        sa.cycle = time;
+        sa.speed = (1f / (float)spriteDefaultFramePerSec) / time * (float)(sa.frameCount - 1);
     }
 
     // [speed]_strip[frame]
@@ -167,9 +191,13 @@ public class SpriteManager : MonoBehaviour {
 
         attribute = attribute.Substring(0, speedEndIndex);
 
-        int iSpeed = System.Convert.ToInt32(attribute);
+        int framePerSec = System.Convert.ToInt32(attribute);
 
-        return (float)iSpeed / (float)frameCount;
+        float deltaTime = 1f / (float)framePerSec;
+
+        float speed = (1f / (float)spriteDefaultFramePerSec) / deltaTime;
+
+        return speed;
     }
 
     void CutSpriteAttribute(ref string[] name)
@@ -258,16 +286,15 @@ public class SpriteManager : MonoBehaviour {
         RUPTURE,
         SCRATCH,
         PLAYER_BULLET,
+        SPARK_1,
+        SPARK_2,
+        AIM,
 
         // body
         CIRCLE,
         SQUARE,
         BELL,
         GLIDER,
-        POWER_CIRCLE,
-        POWER_SQUARE,
-        POWER_BELL,
-        POWER_GLIDER,
 
         // weapon
         BAZOOKA,
@@ -350,9 +377,6 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["circle"] = Name.CIRCLE;
         strNameDic["square"] = Name.SQUARE;
         strNameDic["glider"] = Name.GLIDER;
-        strNameDic["powerbell"] = Name.POWER_BELL;
-        strNameDic["powercircle"] = Name.POWER_CIRCLE;
-        strNameDic["powersquare"] = Name.POWER_SQUARE;
 
         strNameDic["bazooka"] = Name.BAZOOKA;
         strNameDic["launcher"] = Name.LAUNCHER;
@@ -367,6 +391,10 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["wing"] = Name.WING;
 
         strNameDic["player_bullet"] = Name.PLAYER_BULLET;
+        strNameDic["spark1"] = Name.SPARK_1;
+        strNameDic["spark2"] = Name.SPARK_2;
+        strNameDic["aim"] = Name.AIM;
+        strNameDic["bazooka"] = Name.BAZOOKA;
 
         nameKeywordList = new List<string>(strNameDic.Keys);
 
