@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public class LevelMaker : MonoBehaviour {
 
+    public static LevelMaker currentLevel;
+
+    public float clearDegree = 0f; // 0~1
+
+    void Awake()
+    {
+        currentLevel = this;
+    }
 
     public static void ActiveWithComponens(GameObject obj)
     {

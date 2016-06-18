@@ -20,7 +20,7 @@ public class Player : Unit
 
     public void BeHit(Unit target)
     {
-        Debug.Log(target.name + " Hit Player");
+//        Debug.Log(target.name + " Hit Player");
     }
 
     public void ShiftPosition(Vector2 delta)
