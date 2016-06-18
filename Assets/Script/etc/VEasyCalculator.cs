@@ -46,6 +46,12 @@ public class VEasyCalculator {
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
 
+    public static float GetLerpRange(float min, float max, float ratio)
+    {
+        ratio *= (max - min);
+        return ratio + min;
+    }
+
     public static float GetDirectionDelta(ref float from, ref float to)
     {
         GetNormalizedDirection(ref from);

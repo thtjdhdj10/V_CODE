@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LevelHoldOut : LevelMaker
 {
-    public float clearTime = 20f;
+    public float clearTime;
     public float passedTime;
 
     void Update()

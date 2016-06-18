@@ -124,7 +124,7 @@ public class CustomError : Error
         ProjectileUnit.Bullet bullet = new ProjectileUnit.Bullet();
 
         bullet.modelName = "Bolt";
-        bullet.speed = 4f + 0.5f * power;
+        bullet.speed = 3f + 0.5f * power;
         bullet.cooldown = 4f / (2f + power * power);
         bullet.remainCooldown = bullet.cooldown;
 
@@ -218,11 +218,15 @@ public class CustomError : Error
 
     void BellFrame()
     {
-        //float dirToPlayer = VEasyCalculator.GetDirection(this, Player.player);
+        if(weapon != Weapon.BAZOOKA &&
+            weapon != Weapon.LASER)
+        {
+            float dirToPlayer = VEasyCalculator.GetDirection(this, Player.player);
 
-        //Vector3 rot = transform.eulerAngles;
-        //rot.z = dirToPlayer + SpriteManager.spriteDefaultRotation;
-        //transform.eulerAngles = rot;
+            Vector3 rot = transform.eulerAngles;
+            rot.z = dirToPlayer + SpriteManager.spriteDefaultRotation;
+            transform.eulerAngles = rot;
+        }
     }
 
     //

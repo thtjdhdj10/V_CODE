@@ -280,6 +280,7 @@ public class SpriteManager : MonoBehaviour {
         NONE = 0,
 
         // player
+        SHIELD,
 
         // particle
         LASER,
@@ -289,6 +290,7 @@ public class SpriteManager : MonoBehaviour {
         SPARK_1,
         SPARK_2,
         AIM,
+        HIT,
 
         // body
         CIRCLE,
@@ -366,6 +368,8 @@ public class SpriteManager : MonoBehaviour {
 
         strNameDic[""] = Name.NONE;
 
+        strNameDic["shield"] = Name.SHIELD;
+
         strNameDic["transistor_burst"] = Name.TRANSISTOR_BURST;
         strNameDic["digital_terror"] = Name.DIGITAL_TERROR;
         strNameDic["cyber_disk"] = Name.CYBER_DISK;
@@ -395,6 +399,7 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["spark2"] = Name.SPARK_2;
         strNameDic["aim"] = Name.AIM;
         strNameDic["bazooka"] = Name.BAZOOKA;
+        strNameDic["hit"] = Name.HIT;
 
         nameKeywordList = new List<string>(strNameDic.Keys);
 

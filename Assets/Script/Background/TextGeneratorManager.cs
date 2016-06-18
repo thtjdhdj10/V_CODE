@@ -8,6 +8,8 @@ public class TextGeneratorManager : MonoBehaviour {
     public float generateTextRootSpeed;
     float passedGenerateDelay;
 
+    public float drawChance;
+
     public float greenChance;
 
     public float delay;
@@ -15,6 +17,9 @@ public class TextGeneratorManager : MonoBehaviour {
     public float alphaDecreaseSpeed; // per sec
 
     public float highlight;
+
+    public float maxGenSpeed;
+    public float minGenSpeed;
 
     public float fontSize;
 
@@ -44,8 +49,13 @@ public class TextGeneratorManager : MonoBehaviour {
             totalCurrentHp += virusList[i].currentAbilityDic[Enemy.BasicAbility.HEALTH_POINT];
             totalMaxHp += virusList[i].originalAbilityDic[Enemy.BasicAbility.HEALTH_POINT];
         }
-        // LevelMaker.currentLevel TODO Get clearDegree
-//        generateTextRootSpeed
+
+        // 생산속도는 스테이지 진척도에 비례
+        generateTextRootSpeed =
+            VEasyCalculator.GetLerpRange(minGenSpeed, maxGenSpeed,
+            1f - LevelMaker.currentLevel.clearDegree);
+
+//        drawChance = LevelMaker.currentLevel.clearDegree;
 
         if(passedGenerateDelay < generateTextRootSpeed)
         {

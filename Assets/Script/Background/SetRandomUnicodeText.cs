@@ -41,9 +41,10 @@ public class SetRandomUnicodeText : MonoBehaviour {
 
     void AddText()
     {
-        float dice = Random.Range(0f,1f);
+        float dice = Random.Range(0f, 1f);
+
         GameObject obj;
-        if(dice < TextGeneratorManager.manager.greenChance)
+        if (dice < TextGeneratorManager.manager.greenChance)
         {
             obj = VEasyPoolerManager.GetObjectRequest("GreenText");
         }
@@ -55,7 +56,6 @@ public class SetRandomUnicodeText : MonoBehaviour {
         obj.transform.parent = transform.parent;
 
         obj.transform.position = cursor;
-        cursor.y -= TextGeneratorManager.manager.fontSize / 160f;
 
         UILabel label = obj.GetComponent<UILabel>();
 
@@ -67,6 +67,8 @@ public class SetRandomUnicodeText : MonoBehaviour {
 
         labelObjectList.Add(obj);
         labelList.Add(label);
+
+        cursor.y -= TextGeneratorManager.manager.fontSize / 160f;
     }
 
     void FixedUpdate()
