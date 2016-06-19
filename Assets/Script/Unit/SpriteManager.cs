@@ -400,6 +400,8 @@ public class SpriteManager : MonoBehaviour {
         strNameDic["aim"] = Name.AIM;
         strNameDic["bazooka"] = Name.BAZOOKA;
         strNameDic["hit"] = Name.HIT;
+        strNameDic["scratch"] = Name.SCRATCH;
+        strNameDic["rupture"] = Name.RUPTURE;
 
         nameKeywordList = new List<string>(strNameDic.Keys);
 

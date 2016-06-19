@@ -5,7 +5,18 @@ public class Unit : MonoBehaviour
 {
     public bool unitActive = true;
 
-    public float logicalSize;
+    public enum ColliderType
+    {
+        NONE,
+        CIRCLE,
+        RECT,
+    }
+
+    public ColliderType colType;
+
+    public float colCircle;
+
+    public Vector2 colRect;
 
     [System.NonSerialized]
     public HittableUnit hittableUnit;
@@ -71,12 +82,30 @@ public class Unit : MonoBehaviour
         Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();
 
-        if(pos.x + logicalSize < rect.xMin||
-            pos.x - logicalSize > rect.xMax ||
-            pos.y + logicalSize < rect.yMin ||
-            pos.y - logicalSize > rect.yMax)
+        switch(colType)
         {
-            return true;
+            case ColliderType.CIRCLE:
+                {
+                    if (pos.x + colCircle < rect.xMin ||
+                        pos.x - colCircle > rect.xMax ||
+                        pos.y + colCircle < rect.yMin ||
+                        pos.y - colCircle > rect.yMax)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case ColliderType.RECT:
+                {
+                    if (pos.x + colRect.x < rect.xMin ||
+                        pos.x - colRect.x > rect.xMax ||
+                        pos.y + colRect.y < rect.yMin ||
+                        pos.y - colRect.y > rect.yMax)
+                    {
+                        return true;
+                    }
+                }
+                break;
         }
 
         return false;
@@ -87,24 +116,54 @@ public class Unit : MonoBehaviour
         Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();
 
-        if (pos.x - logicalSize < rect.xMin)
+        switch (colType)
         {
-            return PlayerMove.Direction.LEFT;
-        }
+            case ColliderType.CIRCLE:
+                {
+                    if (pos.x - colCircle < rect.xMin)
+                    {
+                        return PlayerMove.Direction.LEFT;
+                    }
 
-        if (pos.x + logicalSize > rect.xMax)
-        {
-            return PlayerMove.Direction.RIGHT;
-        }
+                    if (pos.x + colCircle > rect.xMax)
+                    {
+                        return PlayerMove.Direction.RIGHT;
+                    }
 
-        if (pos.y - logicalSize < rect.yMin)
-        {
-            return PlayerMove.Direction.DOWN;
-        }
+                    if (pos.y - colCircle < rect.yMin)
+                    {
+                        return PlayerMove.Direction.DOWN;
+                    }
 
-        if (pos.y + logicalSize > rect.yMax)
-        {
-            return PlayerMove.Direction.UP;
+                    if (pos.y + colCircle > rect.yMax)
+                    {
+                        return PlayerMove.Direction.UP;
+                    }
+                }
+                break;
+            case ColliderType.RECT:
+                {
+                    if (pos.x - colRect.x < rect.xMin)
+                    {
+                        return PlayerMove.Direction.LEFT;
+                    }
+
+                    if (pos.x + colRect.x > rect.xMax)
+                    {
+                        return PlayerMove.Direction.RIGHT;
+                    }
+
+                    if (pos.y - colRect.y < rect.yMin)
+                    {
+                        return PlayerMove.Direction.DOWN;
+                    }
+
+                    if (pos.y + colRect.y > rect.yMax)
+                    {
+                        return PlayerMove.Direction.UP;
+                    }
+                    break;
+                }
         }
 
         return PlayerMove.Direction.NONE;

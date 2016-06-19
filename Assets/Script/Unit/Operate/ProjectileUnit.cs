@@ -5,7 +5,7 @@ public class ProjectileUnit : OperateUnit
 {
     public float createDelay;
 
-    public class Bullet
+    public class Pattern
     {
         public string modelName;
         public float cooldown;
@@ -13,20 +13,27 @@ public class ProjectileUnit : OperateUnit
         public float speed;
     }
 
-    public class PlayerBullet : Bullet
+    public class PlayerBullet : Pattern
     {
         public float directionDelta;
         public float damage;
     }
 
-    public class BazookaAttack : Bullet
+    public class BazookaAttack : Pattern
     {
         public float analyzeTime;
         public float explosionRange;
         public float attackRange;
     }
 
-    public List<Bullet> fireBulletList = new List<Bullet>();
+    public class Scratch : Pattern
+    {
+        public int count;
+        public float delay;
+        public float size;
+    }
+
+    public List<Pattern> activePatternList = new List<Pattern>();
 
     void OnEnable()
     {
@@ -44,31 +51,31 @@ public class ProjectileUnit : OperateUnit
         }
         else
         {
-            FireFrame();
+            ActiveCheckFrame();
         }
     }
 
-    protected virtual void FireFrame()
+    protected virtual void ActiveCheckFrame()
     {
-        for (int i = 0; i < fireBulletList.Count;++i )
+        for (int i = 0; i < activePatternList.Count; ++i)
         {
-            fireBulletList[i].remainCooldown -= Time.deltaTime;
+            activePatternList[i].remainCooldown -= Time.deltaTime;
 
-            if(fireBulletList[i].remainCooldown < 0f)
+            if (activePatternList[i].remainCooldown < 0f)
             {
-                bool fired = FireBullet(i);
+                bool actived = ActivePattern(i);
 
-                if(fired == true)
+                if (actived)
                 {
-                    fireBulletList[i].remainCooldown = fireBulletList[i].cooldown;
+                    activePatternList[i].remainCooldown = activePatternList[i].cooldown;
                 }
             }
         }
     }
 
-    protected virtual bool FireBullet(int idx)
+    protected virtual bool ActivePattern(int idx)
     {
-        string targetName = fireBulletList[idx].modelName;
+        string targetName = activePatternList[idx].modelName;
 
         GameObject obj = VEasyPoolerManager.GetObjectRequest(targetName);
         Unit unit = obj.GetComponent<Unit>();
@@ -81,7 +88,7 @@ public class ProjectileUnit : OperateUnit
 
         float direction = VEasyCalculator.GetDirection(owner, Player.player);
 
-        unit.movingUnit.InitStraightMove(fireBulletList[idx].speed, direction);
+        unit.movingUnit.InitStraightMove(activePatternList[idx].speed, direction);
      
         return true;
     }

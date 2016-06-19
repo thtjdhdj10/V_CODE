@@ -51,9 +51,12 @@ public class TextGeneratorManager : MonoBehaviour {
         }
 
         // 생산속도는 스테이지 진척도에 비례
-        generateTextRootSpeed =
-            VEasyCalculator.GetLerpRange(minGenSpeed, maxGenSpeed,
-            1f - LevelMaker.currentLevel.clearDegree);
+        if (LevelMaker.currentLevel != null)
+        {
+            generateTextRootSpeed =
+                VEasyCalculator.GetLerpRange(minGenSpeed, maxGenSpeed,
+                1f - LevelMaker.currentLevel.clearDegree);
+        }
 
 //        drawChance = LevelMaker.currentLevel.clearDegree;
 

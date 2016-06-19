@@ -7,7 +7,7 @@ public class Explosion : DefaultBullet {
     {
         NONE,
         BAZOOKA,
-
+        SCRATCH,
     }
 
     public Type type;
@@ -31,7 +31,16 @@ public class Explosion : DefaultBullet {
                 {
                     sa = SpriteManager.manager.typeSpriteDic[SpriteManager.Category.PARTICLE][SpriteManager.Name.BAZOOKA][SpriteManager.Status.EXPLOSION];
 
-                    logicalSize = 0.25f;
+//                    colType = ColliderType.CIRCLE;
+//                    colCircle = 0.25f;
+                }
+                break;
+            case Type.SCRATCH:
+                {
+                    sa = SpriteManager.manager.typeSpriteDic[SpriteManager.Category.PARTICLE][SpriteManager.Name.SCRATCH][SpriteManager.Status.EXPLOSION];
+
+//                    colType = ColliderType.RECT;
+//                    colRect = new Vector2(0.12f, 0.54f);
                 }
                 break;
             default:

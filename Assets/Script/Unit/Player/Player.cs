@@ -23,7 +23,8 @@ public class Player : Unit
 
         unitActive = true;
 
-        logicalSize = 0.1f;
+        colType = Unit.ColliderType.CIRCLE;
+        colCircle = 0.1f;
 
         player = this;
 
@@ -52,7 +53,7 @@ public class Player : Unit
             float direction = VEasyCalculator.GetDirection(player, target);
 
             Vector3 angle;
-            angle.x = -direction + SpriteManager.spriteDefaultRotation;
+            angle.x = -direction;// SpriteManager.spriteDefaultRotation;
             angle.y = 90f;
             angle.z = 0f;
             obj.transform.eulerAngles = angle;
@@ -89,22 +90,22 @@ public class Player : Unit
         {
             case PlayerMove.Direction.LEFT:
                 {
-                    pos.x = -((float)Screen.width / (float)Screen.height) * 2f + logicalSize * 1.1f;
+                    pos.x = -((float)Screen.width / (float)Screen.height) * 2f + colCircle * 1.1f;
                 }
                 break;
             case PlayerMove.Direction.RIGHT:
                 {
-                    pos.x = ((float)Screen.width / (float)Screen.height) * 2f - logicalSize * 1.1f;
+                    pos.x = ((float)Screen.width / (float)Screen.height) * 2f - colCircle * 1.1f;
                 }
                 break;
             case PlayerMove.Direction.DOWN:
                 {
-                    pos.y = -2f + logicalSize * 1.1f;
+                    pos.y = -2f + colCircle * 1.1f;
                 }
                 break;
             case PlayerMove.Direction.UP:
                 {
-                    pos.y = 2f - logicalSize * 1.1f;
+                    pos.y = 2f - colCircle * 1.1f;
                 }
                 break;
         }

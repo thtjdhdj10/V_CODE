@@ -54,7 +54,8 @@ public class CustomError : Error
         if (weaponTypeInitDic.ContainsKey(weapon) == true)
             weaponTypeInitDic[weapon]();
 
-        logicalSize = 0.1f;
+        colType = ColliderType.CIRCLE;
+        colCircle = 0.1f;
     }
 
     protected override void Awake()
@@ -62,11 +63,9 @@ public class CustomError : Error
         base.Awake();
 
         FuncDicMatch();
-
-        Init();
     }
 
-    void OnEnable()
+    void Start()
     {
         Init();
     }
@@ -121,14 +120,14 @@ public class CustomError : Error
         if (projectileUnit == null)
             projectileUnit = gameObject.AddComponent<ProjectileUnit>();
 
-        ProjectileUnit.Bullet bullet = new ProjectileUnit.Bullet();
+        ProjectileUnit.Pattern bullet = new ProjectileUnit.Pattern();
 
         bullet.modelName = "Bolt";
         bullet.speed = 3f + 0.5f * power;
         bullet.cooldown = 4f / (2f + power * power);
         bullet.remainCooldown = bullet.cooldown;
 
-        projectileUnit.fireBulletList.Add(bullet);
+        projectileUnit.activePatternList.Add(bullet);
     }
 
     void LaserInit()
@@ -152,7 +151,7 @@ public class CustomError : Error
         bullet.remainCooldown = bullet.cooldown;
         bullet.explosionRange = 1f;
 
-        projectileUnit.fireBulletList.Add(bullet);
+        projectileUnit.activePatternList.Add(bullet);
         //        bullet.attackRange
 
 

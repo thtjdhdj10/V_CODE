@@ -3,29 +3,52 @@ using System.Collections;
 
 public class VEasyCalculator {
 
-    public static bool IntersectRect(Vector2 from, Vector2 to, float r)
+    public static bool Intersect(Unit a, Unit b)
     {
-        if (r < 0f)
-            return false;
-
-        if(to.x > from.x + r ||
-            to.x < from.x - r ||
-            
-            to.y > from.y + r ||
-            to.y < from.y - r)
+        if(a.colType == Unit.ColliderType.CIRCLE &&
+            b.colType == Unit.ColliderType.CIRCLE)
         {
-            return false;
+            return IntersectCircle(a.transform.position, b.transform.position, a.colCircle + b.colCircle);
+        }
+        else if(a.colType == Unit.ColliderType.RECT &&
+            b.colType == Unit.ColliderType.RECT)
+        {
+            return IntersectRect(a.transform.position, b.transform.position, a.colRect, b.colRect);
+        }
+        else if(a.colType == Unit.ColliderType.CIRCLE &&
+            b.colType == Unit.ColliderType.RECT)
+        {
+            return IntersectCircleRect(a.transform.position, b.transform.position, a.colCircle, b.colRect);
+        }
+        else if(a.colType == Unit.ColliderType.RECT &&
+            b.colType == Unit.ColliderType.CIRCLE)
+        {
+            return IntersectCircleRect(b.transform.position, a.transform.position, b.colCircle, a.colRect);
         }
 
-        return true;
+        return false;
     }
 
-    public static bool IntersectCircle(Vector2 from, Vector2 to, float r)
+    static bool IntersectRect(Vector2 pos1, Vector2 pos2, Vector2 scale1, Vector2 scale2)
+    {
+        float xDelta = Mathf.Abs(pos2.x - pos1.x);
+        float yDelta = Mathf.Abs(pos2.y - pos1.y);
+
+        if(xDelta < scale1.x + scale2.x &&
+            yDelta < scale1.y + scale2.y)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    static bool IntersectCircle(Vector2 pos1, Vector2 pos2, float r)
     {
         if (r < 0f)
             return false;
 
-        float deltaDistanceSquare = Vector2.SqrMagnitude(to - from);
+        float deltaDistanceSquare = Vector2.SqrMagnitude(pos2 - pos1);
 
         if (deltaDistanceSquare > r * r)
         {
@@ -33,6 +56,23 @@ public class VEasyCalculator {
         }
 
         return true;
+    }
+
+    static bool IntersectCircleRect(Vector2 pos1, Vector2 pos2, float scale1, Vector2 scale2)
+    {
+        float xDelta = Mathf.Abs(pos1.x - pos2.x);
+        float yDelta = Mathf.Abs(pos1.y - pos2.y);
+
+        if (xDelta > (scale2.x + scale1)) { return false; }
+        if (yDelta > (scale2.y + scale1)) { return false; }
+
+        if (xDelta <= scale2.x) { return true; }
+        if (yDelta <= scale2.y) { return true; }
+
+        float cornerDistance_sq = (xDelta - scale2.x) * (xDelta - scale2.x) +
+                             (yDelta - scale2.y) * (yDelta - scale2.y);
+
+        return (cornerDistance_sq <= scale1 * scale1);
     }
 
     public static float GetDirection(Unit from, Unit to)

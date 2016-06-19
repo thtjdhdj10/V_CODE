@@ -53,7 +53,10 @@ public class BazookaProjectile : ProjectileUnit {
         GameObject obj = VEasyPoolerManager.GetObjectRequest(bullet.modelName);
         obj.transform.position = targetPos;
         obj.transform.localScale = new Vector3(bullet.explosionRange, bullet.explosionRange, bullet.explosionRange);
-        obj.GetComponent<Unit>().logicalSize = 0.25f * bullet.explosionRange;
+
+        Unit unit = obj.GetComponent<Unit>();
+        unit.colType = Unit.ColliderType.CIRCLE;
+        unit.colCircle = 0.25f * bullet.explosionRange;
 
         yield break;
     }
@@ -63,9 +66,12 @@ public class BazookaProjectile : ProjectileUnit {
         base.Update();
     }
 
-    protected override bool FireBullet(int idx)
+    protected override bool ActivePattern(int idx)
     {
-        BazookaAttack bullet = fireBulletList[idx] as BazookaAttack;
+        //if (activePatternList[idx].GetType() != typeof(BazookaAttack))
+        //    return false;
+
+        BazookaAttack bullet = activePatternList[idx] as BazookaAttack;
 
         StartCoroutine(AnalyzingAttack(bullet));
 

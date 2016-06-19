@@ -32,10 +32,10 @@ public class PlayerBulletProjectile : ProjectileUnit {
         db.speed = speed;
         db.directionDelta = deltaDirection;
 
-        fireBulletList.Add(db);
+        activePatternList.Add(db);
     }
 
-    protected override bool FireBullet(int idx)
+    protected override bool ActivePattern(int idx)
     {
         PlayerAttack pa = Player.player.GetComponent<PlayerAttack>();
         if (pa.attackTypeStateDic[PlayerAttack.AttackType.BULLET] == false)
@@ -43,7 +43,7 @@ public class PlayerBulletProjectile : ProjectileUnit {
             return false;
         }
 
-        PlayerBullet pb = (PlayerBullet)fireBulletList[idx];
+        PlayerBullet pb = (PlayerBullet)activePatternList[idx];
 
         string targetName = pb.modelName;
 

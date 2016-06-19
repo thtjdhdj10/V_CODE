@@ -71,11 +71,13 @@ public class HittableUnit : OperateUnit
 
     public virtual bool CollisionCheck(Unit target)
     {
+        if (target.force == Unit.Force.NONE ||
+            owner.force == Unit.Force.NONE)
+            return false;
+
         if (target.force == owner.force)
             return false;
 
-        float distance = owner.logicalSize + target.logicalSize;
-
-        return VEasyCalculator.IntersectCircle(owner.transform.position, target.transform.position, distance);
+        return VEasyCalculator.Intersect(owner, target);
     }
 }
