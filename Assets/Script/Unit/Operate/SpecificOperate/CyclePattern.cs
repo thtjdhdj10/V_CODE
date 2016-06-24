@@ -20,6 +20,9 @@ public class CyclePattern : ProjectileUnit {
 
     protected override void ActiveCheckFrame()
     {
+        if (activePatternList.Count == 0)
+            return;
+
         if(activePatternList[lastActiveIndex].remainCooldown > 0f)
         {
             activePatternList[lastActiveIndex].remainCooldown -= Time.deltaTime;
@@ -56,9 +59,18 @@ public class CyclePattern : ProjectileUnit {
     IEnumerator ActionScratch(Scratch factor)
     {
         List<GameObject> scratchInitObjList =
-            VEasyPoolerManager.GetObjectListRequest("ScratchTimer", factor.count);
+            VEasyPoolerManager.GetObjectListRequest("ScratchTimer", factor.count, false);
 
-        // TODO 
+        for (int i = 0; i < scratchInitObjList.Count; ++i)
+        {
+            scratchInitObjList[i].SetActive(true);
+
+            scratchInitObjList[i].transform.position = owner.transform.position;
+
+            scratchInitObjList[i].transform.eulerAngles = owner.transform.eulerAngles;
+
+            yield return new WaitForSeconds(factor.delay);
+        }
 
         yield break;
     }

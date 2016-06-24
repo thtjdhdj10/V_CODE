@@ -1,33 +1,21 @@
 fileFormatVersion: 2
-guid: 02959dbfdf5ad8541b2d2b2c6ddf4bfc
-timeCreated: 1466153514
+guid: ddc5ffebe65d9a74698d3b7dff5d3e02
+timeCreated: 1466751217
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: body powercircle 18_strip12_0
-    21300002: body powercircle 18_strip12_1
-    21300004: body powercircle 18_strip12_2
-    21300006: body powercircle 18_strip12_3
-    21300008: body powercircle 18_strip12_4
-    21300010: body powercircle 18_strip12_5
-    21300012: body powercircle 18_strip12_6
-    21300014: body powercircle 18_strip12_7
-    21300016: body powercircle 18_strip12_8
-    21300018: body powercircle 18_strip12_9
-    21300020: body powercircle 18_strip12_10
-    21300022: body powercircle 18_strip12_11
-    21300024: body circle 18_strip12_0
-    21300026: body circle 18_strip12_1
-    21300028: body circle 18_strip12_2
-    21300030: body circle 18_strip12_3
-    21300032: body circle 18_strip12_4
-    21300034: body circle 18_strip12_5
-    21300036: body circle 18_strip12_6
-    21300038: body circle 18_strip12_7
-    21300040: body circle 18_strip12_8
-    21300042: body circle 18_strip12_9
-    21300044: body circle 18_strip12_10
-    21300046: body circle 18_strip12_11
+    21300000: body circle 18_strip12_0
+    21300002: body circle 18_strip12_1
+    21300004: body circle 18_strip12_2
+    21300006: body circle 18_strip12_3
+    21300008: body circle 18_strip12_4
+    21300010: body circle 18_strip12_5
+    21300012: body circle 18_strip12_6
+    21300014: body circle 18_strip12_7
+    21300016: body circle 18_strip12_8
+    21300018: body circle 18_strip12_9
+    21300020: body circle 18_strip12_10
+    21300022: body circle 18_strip12_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -78,118 +66,118 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_1
       rect:
         serializedVersion: 2
-        x: 33
+        x: 32
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_3
       rect:
         serializedVersion: 2
-        x: 99
+        x: 96
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 128
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_5
       rect:
         serializedVersion: 2
-        x: 165
+        x: 160
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_6
       rect:
         serializedVersion: 2
-        x: 198
+        x: 192
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_7
       rect:
         serializedVersion: 2
-        x: 231
+        x: 224
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_8
       rect:
         serializedVersion: 2
-        x: 264
+        x: 256
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_9
       rect:
         serializedVersion: 2
-        x: 297
+        x: 288
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_10
       rect:
         serializedVersion: 2
-        x: 330
+        x: 320
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body circle 18_strip12_11
       rect:
         serializedVersion: 2
-        x: 363
+        x: 352
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

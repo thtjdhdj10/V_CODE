@@ -16,7 +16,6 @@ public class AbilityManager {
             case CustomError.Body.BELL:
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 60f;
-                    abilityDic[Enemy.BasicAbility.IMPORTANCE] = 0f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 0f;
                     abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 90f;
                     
@@ -36,7 +35,6 @@ public class AbilityManager {
             case CustomError.Body.SQUARE:
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 80f;
-                    abilityDic[Enemy.BasicAbility.IMPORTANCE] = 0f;
                     abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 0f;
                     abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0f;
 
@@ -70,7 +68,16 @@ public class AbilityManager {
         abilityDic.Clear();
         abilityFactorDic.Clear();
 
-
+        switch(type)
+        {
+            case Virus.Type.MICRO_BEETLE:
+                {
+                    abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 500f;
+                    abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 6f;
+                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 30f;
+                }
+                break;
+        }
     }
 
     public static void GetAbility(

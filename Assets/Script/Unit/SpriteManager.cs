@@ -143,11 +143,6 @@ public class SpriteManager : MonoBehaviour {
                 Name name = strNameDic[strType[1]];
                 Status status = strStatusDic[strType[2]];
 
-                //// TODO 이부분의 코드 정리
-                //Dictionary<Status, SpriteAttribute> d = new Dictionary<Status, SpriteAttribute>();
-                //Dictionary<Name, Dictionary<Status, SpriteAttribute>> dd = new Dictionary<Name, Dictionary<Status, SpriteAttribute>>();
-                //d[status] = sa;
-                //dd[name] = d;
                 if (typeSpriteDic.ContainsKey(category) == false)
                     typeSpriteDic.Add(category, new Dictionary<Name, Dictionary<Status, SpriteAttribute>>());
                 if (typeSpriteDic[category].ContainsKey(name) == false)

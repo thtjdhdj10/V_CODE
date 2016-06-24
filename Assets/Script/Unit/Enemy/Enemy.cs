@@ -146,7 +146,6 @@ public abstract class Enemy : Unit
     public enum BasicAbility
     {
         HEALTH_POINT = 0,
-        IMPORTANCE,
         MOVE_SPEED,
         TURN_AMOUNT,
     }

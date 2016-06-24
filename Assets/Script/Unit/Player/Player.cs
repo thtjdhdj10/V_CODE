@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Player : Unit
@@ -46,7 +47,6 @@ public class Player : Unit
         if(shieldOn)
         {
             shieldOn = false;
-            shield.gameObject.SetActive(false);
 
             GameObject obj = VEasyPoolerManager.GetFiniteParticleRequest("ParticleShieldBreak");
 
@@ -59,9 +59,91 @@ public class Player : Unit
             obj.transform.eulerAngles = angle;
 
             obj.transform.position = transform.position;
+
+            StartCoroutine(ShieldBreakAnimation());
         }
 
         Debug.Log(target.name + " Hit Player");
+    }
+
+    IEnumerator ShieldBreakAnimation()
+    {
+        Color c = shield.color;
+        Vector3 s = shield.transform.localScale;
+
+        float beDisableTime = 0.75f;
+        float passedTime = 0f;
+        float timeRatio = passedTime / beDisableTime;
+
+        float maxScale = 10f;
+
+        float scale;
+        float alpha;
+
+        while(passedTime < beDisableTime)
+        {
+            passedTime += Time.deltaTime;
+            timeRatio = passedTime / beDisableTime;
+
+            alpha = (1f - timeRatio) * 0.5f;
+            c.a = alpha;
+            shield.color = c;
+
+            scale = 1.2f + Mathf.Pow(0.0f + timeRatio * 1f, 10f) * maxScale;
+            s.x = scale;
+            s.y = scale;
+            shield.transform.localScale = s;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        shield.gameObject.SetActive(false);
+
+        c.a = 1f;
+        shield.color = c;
+        shield.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        yield break;
+    }
+
+    IEnumerator ShieldCreateAnimation()
+    {
+        shield.gameObject.SetActive(true);
+
+        Color c = shield.color;
+        Vector3 s = shield.transform.localScale;
+
+        float beDisableTime = 0.5f;
+        float passedTime = 0f;
+        float timeRatio = passedTime / beDisableTime;
+
+        float maxScale = 3f;
+
+        float scale;
+        float alpha;
+
+        while (passedTime < beDisableTime)
+        {
+            passedTime += Time.deltaTime;
+            timeRatio = 1f - passedTime / beDisableTime;
+
+            alpha = (1f - timeRatio) * 0.5f;
+            c.a = alpha;
+            shield.color = c;
+
+            scale = 1.05f + Mathf.Pow(0.25f + timeRatio * 0.75f, 5f) * maxScale;
+            s.x = scale;
+            s.y = scale;
+            shield.transform.localScale = s;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        c.a = 1f;
+        shield.color = c;
+        shield.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        yield break;
     }
 
     void Update()
@@ -76,7 +158,8 @@ public class Player : Unit
             {
                 passedChargeDelay = 0f;
                 shieldOn = true;
-                shield.gameObject.SetActive(true);
+
+                StartCoroutine(ShieldCreateAnimation());
             }
         }
     }

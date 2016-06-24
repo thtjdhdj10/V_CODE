@@ -14,4 +14,6 @@ public class Virus : Enemy {
         BOOTING_TEMPUS,
     }
 
+    public Type type;
+
 }

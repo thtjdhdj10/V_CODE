@@ -1,25 +1,17 @@
 fileFormatVersion: 2
-guid: bfb5de9e5482b3b4f9d81baf0f0c4bb6
-timeCreated: 1466153507
+guid: 718ca9454fe62b94db555ec4d6ce1855
+timeCreated: 1466751229
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: body powersquare 14_strip8_0
-    21300002: body powersquare 14_strip8_1
-    21300004: body powersquare 14_strip8_2
-    21300006: body powersquare 14_strip8_3
-    21300008: body powersquare 14_strip8_4
-    21300010: body powersquare 14_strip8_5
-    21300012: body powersquare 14_strip8_6
-    21300014: body powersquare 14_strip8_7
-    21300016: body square 14_strip8_0
-    21300018: body square 14_strip8_1
-    21300020: body square 14_strip8_2
-    21300022: body square 14_strip8_3
-    21300024: body square 14_strip8_4
-    21300026: body square 14_strip8_5
-    21300028: body square 14_strip8_6
-    21300030: body square 14_strip8_7
+    21300000: body square 14_strip8_0
+    21300002: body square 14_strip8_1
+    21300004: body square 14_strip8_2
+    21300006: body square 14_strip8_3
+    21300008: body square 14_strip8_4
+    21300010: body square 14_strip8_5
+    21300012: body square 14_strip8_6
+    21300014: body square 14_strip8_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,78 +62,78 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_1
       rect:
         serializedVersion: 2
-        x: 33
+        x: 32
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_3
       rect:
         serializedVersion: 2
-        x: 99
+        x: 96
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 128
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_5
       rect:
         serializedVersion: 2
-        x: 165
+        x: 160
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_6
       rect:
         serializedVersion: 2
-        x: 198
+        x: 192
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body square 14_strip8_7
       rect:
         serializedVersion: 2
-        x: 231
+        x: 224
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
