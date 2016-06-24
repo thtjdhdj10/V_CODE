@@ -42,20 +42,30 @@ public class CustomError : Error
 
         SpriteSetting();
 
-        SetAbillity(power, body, weapon);
-
-        SetColorPerHealth();
+        SetAbility(power, body, weapon);
 
         OperateComponentInit(true, true, false, false, false);
 
-        if (bodyTypeInitDic.ContainsKey(body) == true)
-            bodyTypeInitDic[body]();
+        InitSprite();
 
-        if (weaponTypeInitDic.ContainsKey(weapon) == true)
-            weaponTypeInitDic[weapon]();
+        InitMovingModule();
+
+        InitAttackModule();
 
         colType = ColliderType.CIRCLE;
         colCircle = 0.1f;
+    }
+
+    public override void InitMovingModule()
+    {
+        if (bodyTypeInitDic.ContainsKey(body) == true)
+            bodyTypeInitDic[body]();
+    }
+
+    public override void InitAttackModule()
+    {
+        if (weaponTypeInitDic.ContainsKey(weapon) == true)
+            weaponTypeInitDic[weapon]();
     }
 
     protected override void Awake()
@@ -99,7 +109,9 @@ public class CustomError : Error
 
         float dirToPlayer = VEasyCalculator.GetDirection(transform.position, Player.player.transform.position);
 
-        movingUnit.InitStraightMove(currentAbilityDic[BasicAbility.MOVE_SPEED], dirToPlayer);
+        movingUnit.InitStraightMove(
+            currentAbilityDic[BasicAbility.MOVE_SPEED],
+            dirToPlayer, MovingUnit.BounceType.BOUNCE_WALL);
     }
 
     void GliderInit()
@@ -202,11 +214,6 @@ public class CustomError : Error
         else
         {
             movingUnit.SetSpriteAngle();
-        }
-
-        if (CheckTerritory() != PlayerMove.Direction.NONE)
-        {
-            movingUnit.direction = dirToPlayer;
         }
     }
 

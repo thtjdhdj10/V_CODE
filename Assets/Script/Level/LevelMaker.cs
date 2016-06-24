@@ -13,15 +13,6 @@ public class LevelMaker : MonoBehaviour {
         currentLevel = this;
     }
 
-    public static void ActiveWithComponens(GameObject obj)
-    {
-        MonoBehaviour[] components = obj.GetComponentsInChildren<MonoBehaviour>();
-        for(int i = 0 ; i<components.Length;++i)
-        {
-            components[i].enabled = true;
-        }
-    }
-
     public static IEnumerator ActionEnemyCircle(List<GameObject> objectList, Vector2 pos, float delay, float direction, float angle, float distance)
     {
         float deltaAngle = angle / (float)objectList.Count;
@@ -36,8 +27,7 @@ public class LevelMaker : MonoBehaviour {
         {
             GameObject obj = objectList[i];
 
-            obj.SetActive(true);
-            ActiveWithComponens(obj);
+            obj.GetComponent<ObjectState>().IsUse = true;
 
             obj.transform.position = currentPos;
 
@@ -67,8 +57,7 @@ public class LevelMaker : MonoBehaviour {
         {
             GameObject obj = objectList[i];
 
-            obj.SetActive(true);
-            ActiveWithComponens(obj);
+            obj.GetComponent<ObjectState>().IsUse = true;
 
             obj.transform.position = currentPos;
 
@@ -92,8 +81,7 @@ public class LevelMaker : MonoBehaviour {
         {
             GameObject obj = objectList[i];
 
-            obj.SetActive(true);
-            ActiveWithComponens(obj);
+            obj.GetComponent<ObjectState>().IsUse = true;
 
             obj.transform.position = currentPos;
 
@@ -113,8 +101,7 @@ public class LevelMaker : MonoBehaviour {
         {
             GameObject obj = objectList[i];
 
-            obj.SetActive(true);
-            ActiveWithComponens(obj);
+            obj.GetComponent<ObjectState>().IsUse = true;
 
             obj.transform.position = currentPos;
 
@@ -134,8 +121,7 @@ public class LevelMaker : MonoBehaviour {
         {
             GameObject obj = objectList[i];
 
-            obj.SetActive(true);
-            ActiveWithComponens(obj);
+            obj.GetComponent<ObjectState>().IsUse = true;
 
             obj.transform.position = currentPos;
 

@@ -32,6 +32,8 @@ public class MovingUnit : OperateUnit
 
     public float distanceFactor;
 
+    public BounceType bounceType;
+
     public enum MoveType
     {
         NONE,
@@ -42,13 +44,22 @@ public class MovingUnit : OperateUnit
         LERP_CURVE_PER_DISTANCE,
     }
 
+    public enum BounceType
+    {
+        NONE,
+        BOUNCE_WALL,
+        BOUNCE_UNIT,
+        BOUNCE_ENEMY,
+    }
+
     //
 
-    public void InitStraightMove(float spd, float dir)
+    public void InitStraightMove(float spd, float dir, BounceType _bounceType)
     {
         moveType = MoveType.STRAIGHT;
         speed = spd;
         direction = dir;
+        bounceType = _bounceType;
 
         SetSpriteAngle();
     }
@@ -64,6 +75,17 @@ public class MovingUnit : OperateUnit
         maxCurveDistance = maxDis;
         minCurveDistance = minDis;
         distanceFactor = disFactor;
+    }
+
+    public void InitLerpCurve(float spd, float dir, Unit tar, float curve, BounceType _bounceType)
+    {
+        moveType = MoveType.LERP_CURVE;
+        target = tar;
+
+        speed = spd;
+        direction = dir;
+        curveFactor = curve;
+        bounceType = _bounceType;
     }
 
     //
@@ -82,9 +104,54 @@ public class MovingUnit : OperateUnit
     public virtual void FixedUpdate()
     {
         if (MoveTypeFrameDic.ContainsKey(moveType) == true)
+        {
             MoveTypeFrameDic[moveType]();
+            CollisionProcessing();
+        }
+    }
 
+    void CollisionProcessing()
+    {
+        switch(bounceType)
+        {
+            case BounceType.BOUNCE_WALL:
+                {
+                    if (owner.CheckTerritory() != PlayerMove.Direction.NONE)
+                    {
+                        float dirToPlayer = VEasyCalculator.GetDirection(owner, Player.player);
+                        direction = dirToPlayer;
+                    }
+                }
+                break;
+            case BounceType.BOUNCE_UNIT:
+                {
+                    if(owner.hittableUnit != null)
+                    {
+                        Unit colUnit = owner.hittableUnit.CollisionCheck(false);
 
+                        if(colUnit != null)
+                        {
+                            direction += 180f;
+                            VEasyCalculator.GetNormalizedDirection(ref direction);
+                        }
+                    }
+                }
+                break;
+            case BounceType.BOUNCE_ENEMY:
+                {
+                    if (owner.hittableUnit != null)
+                    {
+                        Unit colUnit = owner.hittableUnit.CollisionCheck();
+
+                        if (colUnit != null)
+                        {
+                            direction += 180f;
+                            VEasyCalculator.GetNormalizedDirection(ref direction);
+                        }
+                    }
+                }
+                break;
+        }
     }
 
     protected virtual void StraightMove()

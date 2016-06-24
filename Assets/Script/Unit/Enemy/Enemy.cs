@@ -77,8 +77,6 @@ public abstract class Enemy : Unit
 
     //
 
-    public List<SpriteRenderer> spriteList = new List<SpriteRenderer>();
-
     [SerializeField]
     public Dictionary<BasicAbility, float> originalAbilityDic = new Dictionary<BasicAbility, float>();
     public Dictionary<BasicAbility, float> abilityFactorDic = new Dictionary<BasicAbility, float>();
@@ -170,7 +168,7 @@ public abstract class Enemy : Unit
     //
 
     // Enemy 의 기본 속성을 초기화
-    public virtual void SetAbillity(float power, CustomError.Body body, CustomError.Weapon weapon)
+    public virtual void SetAbility(float power, CustomError.Body body, CustomError.Weapon weapon)
     {
         AbilityManager.GetAbility(originalAbilityDic, abilityFactorDic, body, weapon);
         CurrentBasicAbilityInit(power);

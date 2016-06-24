@@ -62,7 +62,7 @@ public class PlayerBulletProjectile : ProjectileUnit {
 
         unit.transform.position = Player.player.transform.position + deltaPos;
 
-        unit.movingUnit.InitStraightMove(pb.speed, direction);
+        unit.movingUnit.InitStraightMove(pb.speed, direction, MovingUnit.BounceType.NONE);
         
         unit.hittableUnit.damage = pb.damage;
 

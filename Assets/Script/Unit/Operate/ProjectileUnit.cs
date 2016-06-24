@@ -88,7 +88,7 @@ public class ProjectileUnit : OperateUnit
 
         float direction = VEasyCalculator.GetDirection(owner, Player.player);
 
-        unit.movingUnit.InitStraightMove(activePatternList[idx].speed, direction);
+        unit.movingUnit.InitStraightMove(activePatternList[idx].speed, direction, MovingUnit.BounceType.NONE);
      
         return true;
     }

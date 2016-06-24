@@ -29,6 +29,8 @@ public class Unit : MonoBehaviour
     [System.NonSerialized]
     public ProjectileUnit projectileUnit;
 
+    public List<SpriteRenderer> spriteList = new List<SpriteRenderer>();
+
     public enum Force
     {
         ENEMY,
@@ -72,12 +74,27 @@ public class Unit : MonoBehaviour
 
     }
 
+    public virtual void InitMovingModule()
+    {
+
+    }
+
+    public virtual void InitAttackModule()
+    {
+
+    }
+
+    public virtual void InitSprite()
+    {
+
+    }
+
     public virtual void Hit(Unit target)
     {
 
     }
 
-    protected bool CheckOutside()
+    public bool CheckOutside()
     {
         Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();
@@ -111,7 +128,7 @@ public class Unit : MonoBehaviour
         return false;
     }
 
-    protected PlayerMove.Direction CheckTerritory()
+    public PlayerMove.Direction CheckTerritory()
     {
         Vector2 pos = transform.position;
         Rect rect = CameraManager.manager.GetLogicalRect();

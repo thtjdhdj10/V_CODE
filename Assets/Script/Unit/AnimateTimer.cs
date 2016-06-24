@@ -102,6 +102,8 @@ public class AnimateTimer : Unit {
 
         obj.transform.position = transform.position;
 
+        obj.transform.eulerAngles = transform.eulerAngles;
+
         animator.speed = 0f;
 
         VEasyPoolerManager.ReleaseObjectRequest(gameObject);

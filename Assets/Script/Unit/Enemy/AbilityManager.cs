@@ -73,8 +73,8 @@ public class AbilityManager {
             case Virus.Type.MICRO_BEETLE:
                 {
                     abilityDic[Enemy.BasicAbility.HEALTH_POINT] = 500f;
-                    abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 6f;
-                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 30f;
+                    abilityDic[Enemy.BasicAbility.MOVE_SPEED] = 0.75f;
+                    abilityDic[Enemy.BasicAbility.TURN_AMOUNT] = 0.35f;
                 }
                 break;
         }

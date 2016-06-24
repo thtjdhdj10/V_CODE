@@ -50,6 +50,11 @@ public class HittableUnit : OperateUnit
 
     public virtual Unit CollisionCheck()
     {
+        return CollisionCheck(true);
+    }
+
+    public virtual Unit CollisionCheck(bool enemyOnly)
+    {
         for (int i = 0; i < OperateUnit.beHittableUnitList.Count; ++i)
         {
             Unit target = OperateUnit.beHittableUnitList[i].owner;
@@ -59,6 +64,16 @@ public class HittableUnit : OperateUnit
 
             if (target.gameObject.activeInHierarchy == false)
                 continue;
+
+            if (enemyOnly == true)
+            {
+                if (target.force == Unit.Force.NONE ||
+                    owner.force == Unit.Force.NONE)
+                    continue;
+
+                if (target.force == owner.force)
+                    continue;
+            }
 
             if (CollisionCheck(target) == true)
             {
@@ -71,13 +86,6 @@ public class HittableUnit : OperateUnit
 
     public virtual bool CollisionCheck(Unit target)
     {
-        if (target.force == Unit.Force.NONE ||
-            owner.force == Unit.Force.NONE)
-            return false;
-
-        if (target.force == owner.force)
-            return false;
-
         return VEasyCalculator.Intersect(owner, target);
     }
 }

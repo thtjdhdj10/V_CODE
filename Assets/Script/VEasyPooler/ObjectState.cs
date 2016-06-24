@@ -81,7 +81,10 @@ public class ObjectState : MonoBehaviour
             MonoBehaviour[] c = gameObject.GetComponents<MonoBehaviour>();
             for(int i = 0; i < c.Length; ++i)
             {
-                c[i].enabled = value;
+                if (c[i] != this)
+                {
+                    c[i].enabled = value;
+                }
             }
 
             isUse = value;

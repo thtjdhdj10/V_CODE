@@ -10,7 +10,7 @@ public class CyclePattern : ProjectileUnit {
     {
         base.Awake();
 
-        lastActiveIndex = 0;
+        lastActiveIndex = -1;
     }
 
     void OnEnable()
@@ -23,19 +23,34 @@ public class CyclePattern : ProjectileUnit {
         if (activePatternList.Count == 0)
             return;
 
-        if(activePatternList[lastActiveIndex].remainCooldown > 0f)
+        if (lastActiveIndex < activePatternList.Count &&
+            lastActiveIndex >= 0)
         {
-            activePatternList[lastActiveIndex].remainCooldown -= Time.deltaTime;
+            if (activePatternList[lastActiveIndex].remainCooldown > 0f)
+            {
+                activePatternList[lastActiveIndex].remainCooldown -= Time.deltaTime;
+
+                return;
+            }
         }
-        else
+
+        int activeIndex = lastActiveIndex + 1;
+        if(activeIndex >= activePatternList.Count ||
+            activeIndex < 0)
         {
-            bool actived = ActivePattern(lastActiveIndex + 1);
-            if(actived)
+            activeIndex = 0;
+        }
+
+        bool actived = ActivePattern(activeIndex);
+        if(actived)
+        {
+            if (lastActiveIndex < activePatternList.Count &&
+                lastActiveIndex >= 0)
             {
                 activePatternList[lastActiveIndex].remainCooldown = activePatternList[lastActiveIndex].cooldown;
-
-                ++lastActiveIndex;
             }
+
+            lastActiveIndex = activeIndex;
         }
     }
 
@@ -58,12 +73,27 @@ public class CyclePattern : ProjectileUnit {
 
     IEnumerator ActionScratch(Scratch factor)
     {
+        float dirToPlayer = VEasyCalculator.GetDirection(owner, Player.player);
+
+        owner.movingUnit.InitStraightMove(factor.speed, dirToPlayer, MovingUnit.BounceType.BOUNCE_WALL);
+
+        owner.hittableUnit.enabled = false;
+
+        for(int i = 0 ; i <owner.spriteList.Count;++i)
+        {
+            Color c = owner.spriteList[i].color;
+            c.a = 0.1f;
+            owner.spriteList[i].color = c;
+        }
+
+        //
+
         List<GameObject> scratchInitObjList =
-            VEasyPoolerManager.GetObjectListRequest("ScratchTimer", factor.count, false);
+            VEasyPoolerManager.GetObjectListRequest(factor.modelName, factor.count, false);
 
         for (int i = 0; i < scratchInitObjList.Count; ++i)
         {
-            scratchInitObjList[i].SetActive(true);
+            scratchInitObjList[i].GetComponent<ObjectState>().IsUse = true;
 
             scratchInitObjList[i].transform.position = owner.transform.position;
 
@@ -71,6 +101,12 @@ public class CyclePattern : ProjectileUnit {
 
             yield return new WaitForSeconds(factor.delay);
         }
+
+        owner.InitMovingModule();
+
+        owner.InitSprite();
+
+        owner.hittableUnit.enabled = true;
 
         yield break;
     }
