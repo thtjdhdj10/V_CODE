@@ -10,38 +10,38 @@ public class VEasyCalculator {
         {
             return IntersectCircle(a.transform.position, b.transform.position, a.colCircle + b.colCircle);
         }
-        else if(a.colType == Unit.ColliderType.RECT &&
-            b.colType == Unit.ColliderType.RECT)
-        {
-            return IntersectRect(a.transform.position, b.transform.position, a.colRect, b.colRect);
-        }
+        //else if(a.colType == Unit.ColliderType.RECT &&
+        //    b.colType == Unit.ColliderType.RECT)
+        //{
+        //    return IntersectRect(a.transform.position, b.transform.position, a.colRect, b.colRect);
+        //}
         else if(a.colType == Unit.ColliderType.CIRCLE &&
             b.colType == Unit.ColliderType.RECT)
         {
-            return IntersectCircleRect(a.transform.position, b.transform.position, a.colCircle, b.colRect);
+            return IntersectCircleRect(a.transform.position, b.transform.position, a.colCircle, b.colRect, -b.transform.eulerAngles.z);
         }
         else if(a.colType == Unit.ColliderType.RECT &&
             b.colType == Unit.ColliderType.CIRCLE)
         {
-            return IntersectCircleRect(b.transform.position, a.transform.position, b.colCircle, a.colRect);
+            return IntersectCircleRect(b.transform.position, a.transform.position, b.colCircle, a.colRect, -a.transform.eulerAngles.z);
         }
 
         return false;
     }
 
-    static bool IntersectRect(Vector2 pos1, Vector2 pos2, Vector2 scale1, Vector2 scale2)
-    {
-        float xDelta = Mathf.Abs(pos2.x - pos1.x);
-        float yDelta = Mathf.Abs(pos2.y - pos1.y);
+    //static bool IntersectRect(Vector2 pos1, Vector2 pos2, Vector2 scale1, Vector2 scale2)
+    //{
+    //    float xDelta = Mathf.Abs(pos2.x - pos1.x);
+    //    float yDelta = Mathf.Abs(pos2.y - pos1.y);
 
-        if(xDelta < scale1.x + scale2.x &&
-            yDelta < scale1.y + scale2.y)
-        {
-            return true;
-        }
+    //    if(xDelta < scale1.x + scale2.x &&
+    //        yDelta < scale1.y + scale2.y)
+    //    {
+    //        return true;
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     static bool IntersectCircle(Vector2 pos1, Vector2 pos2, float r)
     {
@@ -58,8 +58,11 @@ public class VEasyCalculator {
         return true;
     }
 
-    static bool IntersectCircleRect(Vector2 pos1, Vector2 pos2, float scale1, Vector2 scale2)
+    static bool IntersectCircleRect(Vector2 pos1, Vector2 pos2, float scale1, Vector2 scale2, float angle)
     {
+        pos1 = GetRotatedPosition(angle, pos1);
+        pos2 = GetRotatedPosition(angle, pos2);
+
         float xDelta = Mathf.Abs(pos1.x - pos2.x);
         float yDelta = Mathf.Abs(pos1.y - pos2.y);
 
@@ -184,6 +187,15 @@ public class VEasyCalculator {
             degrees += 360f;
         else if (degrees >= 360f)
             degrees -= 360f;
+    }
+
+    public static Vector2 GetRotatedPosition(float degrees, Vector2 pos)
+    {
+        float prevDegrees = VEasyCalculator.GetDirection(new Vector2(0f, 0f), pos);
+
+        float distance = Vector2.Distance(new Vector2(0f, 0f), pos);
+
+        return GetRotatedPosition(prevDegrees + degrees, distance);
     }
 
     public static Vector2 GetRotatedPosition(float degrees, float distance)

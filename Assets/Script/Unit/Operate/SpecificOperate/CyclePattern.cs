@@ -99,6 +99,10 @@ public class CyclePattern : ProjectileUnit {
 
             scratchInitObjList[i].transform.eulerAngles = owner.transform.eulerAngles;
 
+            dirToPlayer = VEasyCalculator.GetDirection(owner, Player.player);
+
+            owner.movingUnit.direction = dirToPlayer;
+
             yield return new WaitForSeconds(factor.delay);
         }
 

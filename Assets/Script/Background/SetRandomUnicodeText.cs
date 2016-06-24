@@ -12,7 +12,7 @@ public class SetRandomUnicodeText : MonoBehaviour {
 
     int textCount;
 
-    void Start()
+    void OnEnable()
     {
         passedDelay = 0f;
 
@@ -106,7 +106,8 @@ public class SetRandomUnicodeText : MonoBehaviour {
             Color c = labelList[i].color;
 
             // 마지막 문자 하이라이트
-            if (i == labelList.Count - 1)
+            if (i == labelList.Count - 1 &&
+                cursor.y >= -2f)
             {
                 c.a = TextGeneratorManager.manager.highlight;
             }

@@ -75,7 +75,7 @@ public class MicroBeetle : Virus {
         projectileUnit.activePatternList.Clear();
 
         ProjectileUnit.Scratch patternScratch = new ProjectileUnit.Scratch();
-        patternScratch.cooldown = 7f;
+        patternScratch.cooldown = 8f;
         patternScratch.remainCooldown = patternScratch.cooldown;
         patternScratch.delay = 0.4f;
         patternScratch.count = 10;

@@ -8,7 +8,7 @@ public class ProjectileUnit : OperateUnit
     public class Pattern
     {
         public string modelName;
-        public float cooldown;
+        public float cooldown; // after delay
         public float remainCooldown;
         public float speed;
     }
